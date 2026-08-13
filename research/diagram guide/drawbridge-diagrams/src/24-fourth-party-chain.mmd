@@ -1,0 +1,42 @@
+---
+title: "Drawbridge — The fourth-party chain: your vendor's vendors (Target)"
+---
+flowchart LR
+  ORG["<b>Your organisation</b><br/>reviewed and signed exactly one contract"]
+  V["<b>NimbusWrite AI</b> · Tier 1<br/>reviewed · processes your customer text"]
+
+  S1["<b>Managed model provider</b><br/>processes customer text<br/><b>never reviewed · no contract with you</b>"]
+  S2["<b>Cloud hosting provider</b><br/>processes customer data<br/>already on the approved-vendor register<br/>prior review REV-2024-118"]
+  S3["<b>Analytics processor</b><br/>metadata only<br/><b>never reviewed</b>"]
+  S4["<b>Support desk platform</b><br/>no customer data<br/>on the register"]
+
+  EXTRACT["<b>Structured extraction</b> · Flash<br/>the subprocessor list becomes rows,<br/>not a paragraph in a PDF nobody reads"]
+  DIFF["<b>Deterministic set-difference</b><br/>against the approved-vendor register —<br/>arithmetic, so the findings are source=rule"]
+  FIND["<b>Findings · domain subprocessors · 15 rubric points</b><br/>one per unknown fourth party that processes customer data"]
+  MEM[("<b>Memory Bank</b><br/>the second review naming the same<br/>model provider recognises it")]
+
+  THESIS["<b>The thesis, applied recursively</b><br/>your attack surface is now other companies —<br/>and NimbusWrite's model provider processes your customer text too.<br/>A company you never reviewed and never signed anything with."]
+  SCOPE["<b>Marked (Target), and deliberately not in the video</b><br/>the demo is full at 3:55 and the four pillars are not negotiable.<br/>This lives in the README, the binder and a gallery image."]
+
+  ORG -- "one contract" --> V
+  V --> EXTRACT --> DIFF
+  DIFF --> S1
+  DIFF --> S2
+  DIFF --> S3
+  DIFF --> S4
+  S1 ==> FIND
+  S3 --> FIND
+  FIND --> MEM
+  FIND -.-> THESIS
+  FIND -.-> SCOPE
+
+  classDef org fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef known fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+  classDef unknown fill:#fee2e2,stroke:#b91c1c,stroke-width:2.5px,color:#7f1d1d
+  classDef proc fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+  classDef note fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#7c2d12
+  class ORG,V org
+  class S2,S4,MEM known
+  class S1,S3,FIND unknown
+  class EXTRACT,DIFF proc
+  class THESIS,SCOPE note

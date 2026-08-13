@@ -1,0 +1,58 @@
+---
+title: "Drawbridge — Every review state has exactly one visual treatment"
+---
+flowchart LR
+  subgraph M["MACHINE STATE"]
+    direction TB
+    A1["INTAKE"]
+    A2["QUESTIONNAIRE_OUT"]
+    A3["REPLIES_IN"]
+    A4["EVIDENCE_REVIEW"]
+    A5["SCORED"]
+    A6["GATED · scope contact"]
+    A7["GATED · scope decision"]
+    A8["DECIDED"]
+    A9["MONITORED"]
+    A10["NEEDS_HUMAN"]
+  end
+
+  subgraph U["WHAT THE OPERATOR SEES"]
+    direction TB
+    B1["Blue pill <i>Planning</i> · skeleton timeline · no score yet"]
+    B2["Blue pill <i>Awaiting vendor</i> · elapsed-day counter running"]
+    B3["Blue pill <i>Parsing replies</i> · coverage bar filling"]
+    B4["Blue pill <i>Reading evidence</i> · document list with verdicts"]
+    B5["Amber pill <i>Scored</i> · score appears, memo generating"]
+    B6["Orange card in <i>Needs you</i> · the actual email, one tap to authorise"]
+    B7["Orange card in <i>Needs you</i> · memo, breakdown, three decisions"]
+    B8["Green pill <i>Decided</i> · approver name and timestamp on the row"]
+    B9["Green pill <i>Monitoring</i> · last sweep time, next sweep time"]
+    B10["Red card · what stalled, what the fleet did, what it refuses to do"]
+  end
+
+  A1 --> B1
+  A2 --> B2
+  A3 --> B3
+  A4 --> B4
+  A5 --> B5
+  A6 --> B6
+  A7 --> B7
+  A8 --> B8
+  A9 --> B9
+  A10 --> B10
+
+  RULE["<b>One state, one treatment, no exceptions</b><br/>the operator can name the machine state from the screen alone,<br/>and every colour matches the architecture diagrams"]
+  U --> RULE
+
+  classDef s fill:#e2e8f0,stroke:#334155,stroke-width:1.5px,color:#0f172a
+  classDef inflight fill:#dbeafe,stroke:#1d4ed8,stroke-width:1.5px,color:#1e3a8a
+  classDef gate fill:#ffedd5,stroke:#c2410c,stroke-width:2px,color:#7c2d12
+  classDef done fill:#dcfce7,stroke:#15803d,stroke-width:1.5px,color:#14532d
+  classDef bad fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#7f1d1d
+  classDef rule fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+  class A1,A2,A3,A4,A5,A6,A7,A8,A9,A10 s
+  class B1,B2,B3,B4,B5 inflight
+  class B6,B7 gate
+  class B8,B9 done
+  class B10 bad
+  class RULE rule

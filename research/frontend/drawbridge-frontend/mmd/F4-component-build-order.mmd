@@ -1,0 +1,48 @@
+---
+title: "Drawbridge — Frontend build order: what to write, in what order, and when to stop"
+---
+flowchart TB
+  subgraph P1["PHASE 1 · Aug 14–19 — ugly is fine, working is not optional"]
+    direction LR
+    C1["<b>App shell</b><br/>top bar, nav, page frame"]
+    C2["<b>StatePill</b><br/>one component, ten states"]
+    C3["<b>ReviewCard</b><br/>the queue row"]
+    C4["<b>Timeline + TimelineEntry</b><br/>collapsed only"]
+    C5["<b>GateCard</b> v1<br/>memo, decision, submit"]
+    C6["<b>Vendor portal</b><br/>question, answer, upload"]
+    C7["<b>Inbox simulator</b><br/>list of messages"]
+  end
+
+  subgraph P2["PHASE 2 · Aug 20–24 — the four pillars must be visible"]
+    direction LR
+    D1["<b>AdversarialBanner</b><br/>full-bleed, the only one"]
+    D2["<b>TimelineEntry expanded</b><br/>goal, decision, model, cost, span"]
+    D3["<b>ScoreDelta</b><br/>56 → 31 with the itemised modifier"]
+    D4["<b>NeedsHumanCard</b> + DLQ panel"]
+    D5["<b>FleetStatusStrip</b><br/>live counters in the top bar"]
+    D6["<b>ActivityTicker</b><br/>policy blocks visible unprompted"]
+  end
+
+  subgraph P3["PHASE 3 · Aug 25–27 — polish is a scoring activity"]
+    direction LR
+    E1["<b>S0 judge entry</b><br/>three doors, live stats"]
+    E2["<b>BinderView</b> + export"]
+    E3["<b>TimeCompressionBadge</b><br/>shown whenever factor ≠ 1"]
+    E4["<b>Empty states and skeletons</b><br/>never a spinner on a blank page"]
+    E5["<b>Docs site</b><br/>five sections, diagrams embedded"]
+  end
+
+  STOP["<b>Aug 28 · feature freeze</b><br/>no new components. Demo-breaking bug fixes only.<br/>Everything below the cut line stays unbuilt: charts, settings,<br/>vendor CRUD, mobile, dark mode, auth."]
+
+  C4 --> D1
+  D3 --> E1
+  E2 --> STOP
+
+  classDef p1 fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef p2 fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+  classDef p3 fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+  classDef stop fill:#fee2e2,stroke:#b91c1c,stroke-width:2.5px,color:#7f1d1d
+  class C1,C2,C3,C4,C5,C6,C7 p1
+  class D1,D2,D3,D4,D5,D6 p2
+  class E1,E2,E3,E4,E5 p3
+  class STOP stop

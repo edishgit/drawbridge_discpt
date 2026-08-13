@@ -1,0 +1,50 @@
+---
+title: "Drawbridge — Frontend surfaces: what gets built, for whom, and how much polish it earns"
+---
+flowchart TB
+  subgraph BUILD["BUILD — five surfaces, one Next.js app plus one docs site"]
+    direction LR
+    S0["<b>S0 · Judge entry</b><br/>the hosted URL, no login<br/>three doors: video, live review, docs<br/><i>polish: high · ~4h</i>"]
+    S1["<b>S1 · Internal dashboard</b><br/>queue · timeline · gate · binder<br/>the screen the demo lives on<br/><i>polish: highest · ~30h</i>"]
+    S2["<b>S2 · Vendor portal</b><br/>token-scoped questionnaire and uploads<br/>15 seconds of screen time<br/><i>polish: minimal · ~5h</i>"]
+    S3["<b>S3 · Inbox simulator</b><br/>the mailbox that proves exactly-once<br/><i>polish: minimal · ~3h</i>"]
+    S4["<b>S4 · Docs site</b><br/>overview, getting started, architecture,<br/>security, live demo<br/><i>polish: medium · ~6h</i>"]
+  end
+
+  subgraph SKIP["DO NOT BUILD — each one costs days and scores nothing"]
+    direction LR
+    N1["Auth, accounts,<br/>roles and org settings"]
+    N2["Vendor CRUD, contracts,<br/>renewals, spend tracking"]
+    N3["Charts, analytics,<br/>trend dashboards"]
+    N4["Mobile layouts<br/>below 1280px"]
+    N5["Dark mode<br/>for the product UI"]
+    N6["A marketing site<br/>separate from S0"]
+  end
+
+  J["<b>The judge</b><br/>eight minutes, no account"]
+  P["<b>Priya</b> · analyst"]
+  E["<b>Elena</b> · CISO"]
+  M["<b>Marcus</b> · procurement"]
+  V["<b>The vendor</b>"]
+
+  J --> S0
+  S0 --> S1
+  S0 --> S4
+  P --> S1
+  E --> S1
+  M --> S1
+  V --> S2
+  S1 -. "outbound mail lands here" .-> S3
+  S2 -. "replies land here" .-> S3
+
+  RULE["<b>The rule that decides every frontend question</b><br/>if it does not appear in the four-minute video, in the README spin-up,<br/>or in a judged artefact, it does not get built"]
+  SKIP --> RULE
+
+  classDef build fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef skip fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#7f1d1d
+  classDef person fill:#ffedd5,stroke:#c2410c,stroke-width:2px,color:#7c2d12
+  classDef rule fill:#dcfce7,stroke:#15803d,stroke-width:2.5px,color:#14532d
+  class S0,S1,S2,S3,S4 build
+  class N1,N2,N3,N4,N5,N6 skip
+  class J,P,E,M,V person
+  class RULE rule

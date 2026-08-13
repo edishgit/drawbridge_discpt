@@ -1,0 +1,35 @@
+---
+title: "Drawbridge — The judge's eight minutes: the only user journey that scores points"
+---
+flowchart LR
+  START(["Judge opens the<br/>Devpost gallery card"])
+  VID["<b>0:00–4:00 · the video</b><br/>four pillars happen live"]
+  URL["<b>Clicks the hosted URL</b><br/>loads logged-out in under 2s"]
+  DOOR{"<b>S0 · three doors</b>"}
+  REV["<b>Explore a completed review</b><br/>NimbusWrite AI, read-only<br/>the injection is already on screen"]
+  DOCS["<b>Architecture and security docs</b><br/>diagrams embedded, sources copyable"]
+  REPO["<b>Opens the repo</b><br/>README, Makefile, /docs, tests"]
+  BINDER["<b>Exports a binder</b><br/>41 pages in under 3 seconds"]
+  DONE(["Can retell the one-liner<br/>to a colleague"])
+
+  START --> VID --> URL --> DOOR
+  DOOR --> REV
+  DOOR --> DOCS
+  DOOR --> REPO
+  REV --> BINDER --> DONE
+  DOCS --> DONE
+  REPO --> DONE
+
+  F1["<b>Failure 1</b> · the URL asks for a login<br/>→ the judge leaves and scores the video only"]
+  F2["<b>Failure 2</b> · the dashboard opens empty<br/>→ nothing to look at, no seeded review"]
+  F3["<b>Failure 3</b> · a cold start takes 30 seconds<br/>→ scale-to-zero without a warm path"]
+  URL -.-> F1
+  DOOR -.-> F2
+  URL -.-> F3
+
+  classDef step fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef good fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+  classDef bad fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#7f1d1d
+  class VID,URL,DOOR,REV,DOCS,REPO step
+  class BINDER,DONE,START good
+  class F1,F2,F3 bad
