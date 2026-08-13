@@ -1,0 +1,65 @@
+---
+title: "Drawbridge — J1: a Tier-1 vendor review, intake to approval"
+---
+sequenceDiagram
+  autonumber
+  actor M as Marcus · Procurement
+  participant D as Dashboard
+  participant O as Orchestrator
+  participant PS as Pub/Sub
+  participant Q as Questionnaire
+  actor V as Vendor contact
+  participant A as Ingress · Model Armor
+  participant E as Evidence
+  participant R as Risk Scorer
+  actor EL as Elena · CISO
+
+  rect rgb(219, 234, 254)
+  Note over M,O: Day 0 — intake and planning, minutes not weeks
+  M->>D: Submit NimbusWrite AI, processes customer text, 40k per year
+  D->>PS: publish review.intake
+  PS->>O: deliver intake event
+  O->>O: recall dossier from Memory Bank, tier the vendor
+  Note right of O: Tier 1 — processes customer data<br/>and is an AI service. When ambiguous, tier up.
+  O->>PS: publish review.plan_ready with checkpointed plan
+  end
+
+  rect rgb(255, 237, 213)
+  Note over Q,V: Day 0 — the fleet asks permission before it speaks to an outsider
+  PS->>Q: deliver plan_ready
+  Q->>Q: select and tailor 60 questions from the bank
+  Q--xD: gateway blocks send — P1 requires an approval token
+  D->>M: approval card — the review parks at the P1 gate, scope contact
+  M->>D: one tap authorises first contact
+  D->>Q: signed single-use token, scope email
+  Q->>V: questionnaire, under idempotency key questionnaire_send v1
+  end
+
+  rect rgb(220, 252, 231)
+  Note over V,E: Days 1 and 2 — replies arrive in fragments, evidence is screened
+  V->>A: partial replies and a SOC 2 report
+  A->>A: extract locally, scrub PII, screen for injection
+  A->>PS: publish evidence.screened with clean-stamp
+  PS->>Q: deliver reply events
+  Q->>Q: parse incrementally, merge by question id, record confidence
+  Q->>V: chase round 2 on schedule, its own idempotency key chase round2
+  PS->>E: deliver screened evidence
+  E->>E: pass 1 Flash — extract control claims
+  E->>E: pass 2 Pro — reconcile claims against answers
+  E->>PS: findings ready, MFA claim contradicts SOC 2 exception, severity high
+  end
+
+  rect rgb(243, 232, 255)
+  Note over R,EL: Day 3 — scoring and the human gate
+  PS->>R: deliver findings_ready
+  R->>R: deterministic rubric arithmetic in Python, not in the prompt
+  R->>R: one Pro call writes the CISO memo
+  R->>D: score 71, band conditional, memo and score breakdown
+  D->>EL: gate card with findings and reasoning
+  EL->>D: approve with conditions, identity and timestamp recorded
+  D->>PS: publish review.approved
+  PS->>O: close the review, write the dossier to Memory Bank
+  O->>D: audit binder available for export
+  end
+
+  Note over M,EL: Three weeks of calendar review compressed to about three days, and roughly<br/>fifty analyst hours to under one. Vendor reply latency is the floor — the fleet adds none of its own.

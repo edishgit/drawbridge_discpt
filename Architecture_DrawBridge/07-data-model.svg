@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1000" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1240" height="1000" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="1239" height="999" fill="none" stroke="#E2E8F0"/>
+<text x="48" y="46" font-size="22" font-weight="700" fill="#0F172A">Data architecture — the workflow ledger</text>
+<text x="48" y="70" font-size="13" fill="#64748B">Firestore collections · every row a judge can trace from the dashboard to the binder</text>
+
+<line x1="410" y1="249" x2="446" y2="249" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="428" y="240" font-size="10.5" fill="#64748B" text-anchor="middle">1‥N</text>
+<line x1="800" y1="249" x2="836" y2="249" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="818" y="240" font-size="10.5" fill="#64748B" text-anchor="middle">1‥N</text>
+<line x1="625" y1="358" x2="625" y2="576" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="637" y="470" font-size="10.5" fill="#64748B">1‥N</text>
+<path d="M520 358 L520 470 L235 470 L235 576" fill="none" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="255" y="462" font-size="10.5" fill="#64748B">1‥N</text>
+<path d="M730 358 L730 470 L1015 470 L1015 576" fill="none" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="985" y="462" font-size="10.5" fill="#64748B" text-anchor="end">1‥1</text>
+
+<g>
+<rect x="60" y="140" width="350" height="218" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.25"/>
+<rect x="60" y="140" width="350" height="34" rx="8" fill="#0D9488"/>
+<rect x="60" y="160" width="350" height="14" fill="#0D9488"/>
+<text x="76" y="162" font-size="12.5" font-weight="600" fill="#FFFFFF">vendors</text>
+<text x="74" y="194" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="194" font-size="12" font-weight="500" fill="#0F172A">vendor_id</text><text x="396" y="194" font-size="10.5" fill="#64748B" text-anchor="end">PK</text>
+<text x="74" y="220" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="220" font-size="12" font-weight="500" fill="#0F172A">name</text><text x="396" y="220" font-size="10.5" fill="#64748B" text-anchor="end">NimbusWrite AI</text>
+<text x="74" y="246" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="246" font-size="12" font-weight="500" fill="#0F172A">category</text><text x="396" y="246" font-size="10.5" fill="#64748B" text-anchor="end">e.g. AI SaaS</text>
+<text x="74" y="272" font-size="10.5" fill="#94A3B8">bool</text><text x="126" y="272" font-size="12" font-weight="500" fill="#0F172A">is_ai_vendor</text><text x="396" y="272" font-size="10.5" fill="#64748B" text-anchor="end">adds AI rubric domain</text>
+<text x="74" y="298" font-size="10.5" fill="#94A3B8">int</text><text x="126" y="298" font-size="12" font-weight="500" fill="#0F172A">tier</text><text x="396" y="298" font-size="10.5" fill="#64748B" text-anchor="end">1–3 · review depth</text>
+<text x="74" y="324" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="324" font-size="12" font-weight="500" fill="#0F172A">status</text><text x="396" y="324" font-size="10.5" fill="#64748B" text-anchor="end">active / blocked</text>
+<text x="74" y="350" font-size="10.5" fill="#94A3B8">bool</text><text x="126" y="350" font-size="12" font-weight="500" fill="#0F172A">adversarial_flag</text><text x="396" y="350" font-size="10.5" fill="#64748B" text-anchor="end">raised by Model Armor</text>
+</g>
+<g>
+<rect x="450" y="140" width="350" height="218" rx="8" fill="#FFFFFF" stroke="#4F46E5" stroke-width="1.25"/>
+<rect x="450" y="140" width="350" height="34" rx="8" fill="#4F46E5"/>
+<rect x="450" y="160" width="350" height="14" fill="#4F46E5"/>
+<text x="466" y="162" font-size="12.5" font-weight="600" fill="#FFFFFF">reviews</text>
+<text x="464" y="194" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="194" font-size="12" font-weight="500" fill="#0F172A">review_id</text><text x="786" y="194" font-size="10.5" fill="#64748B" text-anchor="end">PK</text>
+<text x="464" y="220" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="220" font-size="12" font-weight="500" fill="#0F172A">vendor_id</text><text x="786" y="220" font-size="10.5" fill="#64748B" text-anchor="end">FK → vendors</text>
+<text x="464" y="246" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="246" font-size="12" font-weight="500" fill="#0F172A">state</text><text x="786" y="246" font-size="10.5" fill="#64748B" text-anchor="end">intake → … → decided</text>
+<text x="464" y="272" font-size="10.5" fill="#94A3B8">int</text><text x="516" y="272" font-size="12" font-weight="500" fill="#0F172A">score</text><text x="786" y="272" font-size="10.5" fill="#64748B" text-anchor="end">0–100</text>
+<text x="464" y="298" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="298" font-size="12" font-weight="500" fill="#0F172A">band</text><text x="786" y="298" font-size="10.5" fill="#64748B" text-anchor="end">approve / conditional / escalate</text>
+<text x="464" y="324" font-size="10.5" fill="#94A3B8">ts</text><text x="516" y="324" font-size="12" font-weight="500" fill="#0F172A">opened_at</text><text x="786" y="324" font-size="10.5" fill="#64748B" text-anchor="end">wall-clock start</text>
+<text x="464" y="350" font-size="10.5" fill="#94A3B8">ts</text><text x="516" y="350" font-size="12" font-weight="500" fill="#0F172A">decided_at</text><text x="786" y="350" font-size="10.5" fill="#64748B" text-anchor="end">+ approver identity</text>
+</g>
+<g>
+<rect x="840" y="140" width="350" height="218" rx="8" fill="#FFFFFF" stroke="#64748B" stroke-width="1.25"/>
+<rect x="840" y="140" width="350" height="34" rx="8" fill="#64748B"/>
+<rect x="840" y="160" width="350" height="14" fill="#64748B"/>
+<text x="856" y="162" font-size="12.5" font-weight="600" fill="#FFFFFF">events</text>
+<text x="854" y="194" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="194" font-size="12" font-weight="500" fill="#0F172A">event_id</text><text x="1176" y="194" font-size="10.5" fill="#64748B" text-anchor="end">PK</text>
+<text x="854" y="220" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="220" font-size="12" font-weight="500" fill="#0F172A">review_id</text><text x="1176" y="220" font-size="10.5" fill="#64748B" text-anchor="end">FK → reviews</text>
+<text x="854" y="246" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="246" font-size="12" font-weight="500" fill="#0F172A">type</text><text x="1176" y="246" font-size="10.5" fill="#64748B" text-anchor="end">intake · reply · evidence …</text>
+<text x="854" y="272" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="272" font-size="12" font-weight="500" fill="#0F172A">payload_ref</text><text x="1176" y="272" font-size="10.5" fill="#64748B" text-anchor="end">Storage / doc ref</text>
+<text x="854" y="298" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="298" font-size="12" font-weight="500" fill="#0F172A">idem_key</text><text x="1176" y="298" font-size="10.5" fill="#64748B" text-anchor="end">exactly-once guard</text>
+<text x="854" y="324" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="324" font-size="12" font-weight="500" fill="#0F172A">source</text><text x="1176" y="324" font-size="10.5" fill="#64748B" text-anchor="end">emitting agent</text>
+<text x="854" y="350" font-size="10.5" fill="#94A3B8">ts</text><text x="906" y="350" font-size="12" font-weight="500" fill="#0F172A">ts</text><text x="1176" y="350" font-size="10.5" fill="#64748B" text-anchor="end">ordered, immutable log</text>
+</g>
+
+<g>
+<rect x="60" y="580" width="350" height="218" rx="8" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.25"/>
+<rect x="60" y="580" width="350" height="34" rx="8" fill="#16A34A"/>
+<rect x="60" y="600" width="350" height="14" fill="#16A34A"/>
+<text x="76" y="602" font-size="12.5" font-weight="600" fill="#FFFFFF">qa_responses</text>
+<text x="74" y="634" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="634" font-size="12" font-weight="500" fill="#0F172A">review_id</text><text x="396" y="634" font-size="10.5" fill="#64748B" text-anchor="end">FK → reviews</text>
+<text x="74" y="660" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="660" font-size="12" font-weight="500" fill="#0F172A">question_id</text><text x="396" y="660" font-size="10.5" fill="#64748B" text-anchor="end">rubric-linked</text>
+<text x="74" y="686" font-size="10.5" fill="#94A3B8">text</text><text x="126" y="686" font-size="12" font-weight="500" fill="#0F172A">answer_text</text><text x="396" y="686" font-size="10.5" fill="#64748B" text-anchor="end">vendor's own words</text>
+<text x="74" y="712" font-size="10.5" fill="#94A3B8">float</text><text x="126" y="712" font-size="12" font-weight="500" fill="#0F172A">confidence</text><text x="396" y="712" font-size="10.5" fill="#64748B" text-anchor="end">parser certainty</text>
+<text x="74" y="738" font-size="10.5" fill="#94A3B8">bool</text><text x="126" y="738" font-size="12" font-weight="500" fill="#0F172A">needs_human</text><text x="396" y="738" font-size="10.5" fill="#64748B" text-anchor="end">unparseable → queue</text>
+<text x="74" y="764" font-size="10.5" fill="#94A3B8">str</text><text x="126" y="764" font-size="12" font-weight="500" fill="#0F172A">source_msg</text><text x="396" y="764" font-size="10.5" fill="#64748B" text-anchor="end">provenance</text>
+<text x="74" y="790" font-size="10.5" fill="#94A3B8">ts</text><text x="126" y="790" font-size="12" font-weight="500" fill="#0F172A">parsed_at</text><text x="396" y="790" font-size="10.5" fill="#64748B" text-anchor="end">incremental, over days</text>
+</g>
+<g>
+<rect x="450" y="580" width="350" height="218" rx="8" fill="#FFFFFF" stroke="#9333EA" stroke-width="1.25"/>
+<rect x="450" y="580" width="350" height="34" rx="8" fill="#9333EA"/>
+<rect x="450" y="600" width="350" height="14" fill="#9333EA"/>
+<text x="466" y="602" font-size="12.5" font-weight="600" fill="#FFFFFF">findings</text>
+<text x="464" y="634" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="634" font-size="12" font-weight="500" fill="#0F172A">finding_id</text><text x="786" y="634" font-size="10.5" fill="#64748B" text-anchor="end">PK</text>
+<text x="464" y="660" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="660" font-size="12" font-weight="500" fill="#0F172A">review_id</text><text x="786" y="660" font-size="10.5" fill="#64748B" text-anchor="end">FK → reviews</text>
+<text x="464" y="686" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="686" font-size="12" font-weight="500" fill="#0F172A">domain</text><text x="786" y="686" font-size="10.5" fill="#64748B" text-anchor="end">rubric domain</text>
+<text x="464" y="712" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="712" font-size="12" font-weight="500" fill="#0F172A">severity</text><text x="786" y="712" font-size="10.5" fill="#64748B" text-anchor="end">low / med / high</text>
+<text x="464" y="738" font-size="10.5" fill="#94A3B8">bool</text><text x="516" y="738" font-size="12" font-weight="500" fill="#0F172A">contradiction</text><text x="786" y="738" font-size="10.5" fill="#64748B" text-anchor="end">claims vs evidence</text>
+<text x="464" y="764" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="764" font-size="12" font-weight="500" fill="#0F172A">evidence_ref</text><text x="786" y="764" font-size="10.5" fill="#64748B" text-anchor="end">source passage</text>
+<text x="464" y="790" font-size="10.5" fill="#94A3B8">str</text><text x="516" y="790" font-size="12" font-weight="500" fill="#0F172A">trace_ref</text><text x="786" y="790" font-size="10.5" fill="#64748B" text-anchor="end">reasoning span</text>
+</g>
+<g>
+<rect x="840" y="580" width="350" height="218" rx="8" fill="#FFFFFF" stroke="#D97706" stroke-width="1.25"/>
+<rect x="840" y="580" width="350" height="34" rx="8" fill="#D97706"/>
+<rect x="840" y="600" width="350" height="14" fill="#D97706"/>
+<text x="856" y="602" font-size="12.5" font-weight="600" fill="#FFFFFF">approvals</text>
+<text x="854" y="634" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="634" font-size="12" font-weight="500" fill="#0F172A">review_id</text><text x="1176" y="634" font-size="10.5" fill="#64748B" text-anchor="end">FK → reviews</text>
+<text x="854" y="660" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="660" font-size="12" font-weight="500" fill="#0F172A">decision</text><text x="1176" y="660" font-size="10.5" fill="#64748B" text-anchor="end">approve / conditional / reject</text>
+<text x="854" y="686" font-size="10.5" fill="#94A3B8">text</text><text x="906" y="686" font-size="12" font-weight="500" fill="#0F172A">conditions</text><text x="1176" y="686" font-size="10.5" fill="#64748B" text-anchor="end">required mitigations</text>
+<text x="854" y="712" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="712" font-size="12" font-weight="500" fill="#0F172A">identity</text><text x="1176" y="712" font-size="10.5" fill="#64748B" text-anchor="end">named human · gate G1</text>
+<text x="854" y="738" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="738" font-size="12" font-weight="500" fill="#0F172A">memo_ref</text><text x="1176" y="738" font-size="10.5" fill="#64748B" text-anchor="end">Pro-written risk memo</text>
+<text x="854" y="764" font-size="10.5" fill="#94A3B8">str</text><text x="906" y="764" font-size="12" font-weight="500" fill="#0F172A">binder_ref</text><text x="1176" y="764" font-size="10.5" fill="#64748B" text-anchor="end">exported evidence pack</text>
+<text x="854" y="790" font-size="10.5" fill="#94A3B8">ts</text><text x="906" y="790" font-size="12" font-weight="500" fill="#0F172A">ts</text><text x="1176" y="790" font-size="10.5" fill="#64748B" text-anchor="end">decision timestamp</text>
+</g>
+
+<rect x="60" y="838" width="1130" height="72" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="625" y="866" font-size="12" fill="#475569" text-anchor="middle">Beyond Firestore: vendor dossiers and org policy memory live in Memory Bank; raw evidence lives in Cloud Storage (quarantine/ → clean/).</text>
+<text x="625" y="890" font-size="12" fill="#475569" text-anchor="middle">Every side-effecting step writes its idempotency key first — the reason a resumed review never emails a vendor twice.</text>
+
+<text x="1192" y="962" font-size="11" fill="#94A3B8" text-anchor="end">Drawbridge · data architecture and models</text>
+</svg>

@@ -1,0 +1,50 @@
+---
+title: "Drawbridge — Review state machine: the system refuses to guess"
+---
+stateDiagram-v2
+  direction TB
+  [*] --> INTAKE
+
+  INTAKE --> QUESTIONNAIRE_OUT : plan checkpointed
+  QUESTIONNAIRE_OUT --> GATED : P1 · no approval token for first contact
+  GATED --> QUESTIONNAIRE_OUT : contact authorised, single-use token spent
+  QUESTIONNAIRE_OUT --> REPLIES_IN : coverage reaches 90 percent
+  REPLIES_IN --> EVIDENCE_REVIEW : documents screened and stamped
+  EVIDENCE_REVIEW --> SCORED : findings reconciled
+  SCORED --> GATED : G1 · memo written, waiting on a named human
+  GATED --> DECIDED : signed approval token, identity recorded
+  DECIDED --> MONITORED : watchdog takes over the vendor
+  MONITORED --> MONITORED : scheduled sweep, no signal
+
+  MONITORED --> EVIDENCE_REVIEW : watchdog.hit opens a NEW linked review
+
+  INTAKE --> NEEDS_HUMAN
+  QUESTIONNAIRE_OUT --> NEEDS_HUMAN : three chases, no reply
+  REPLIES_IN --> NEEDS_HUMAN : answer below the confidence threshold
+  EVIDENCE_REVIEW --> NEEDS_HUMAN : corrupt or unreadable document
+  SCORED --> NEEDS_HUMAN : invalid transition or DLQ exhaustion
+
+  NEEDS_HUMAN --> [*] : analyst resolves and the review resumes
+
+  note right of GATED
+    One state, two scopes.
+    gate_scope = contact  → P1, first outbound email
+    gate_scope = decision → G1, risk acceptance
+    Both are signed, single-use and scoped,
+    and both are enforced at the gateway —
+    never in the user interface.
+  end note
+
+  note right of NEEDS_HUMAN
+    Enterable from any state.
+    Parks the review with a dashboard card
+    explaining what stalled and why.
+    It never silently corrects.
+  end note
+
+  note left of MONITORED
+    History is never mutated.
+    A reopened review is a new record
+    linked to the old one, so the
+    audit trail stays intact.
+  end note

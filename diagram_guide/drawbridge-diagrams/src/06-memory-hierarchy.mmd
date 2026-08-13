@@ -1,0 +1,33 @@
+---
+title: "Drawbridge — Memory hierarchy: persistence is not memory"
+---
+flowchart TB
+  L1["<b>L1 · SESSION STATE</b> — Agent Engine<br/>─────────────────────────<br/>in-flight reasoning for a single agent turn<br/>tool-call scratchpad, partial parses<br/><br/><b>Lifetime</b> — the turn<br/><b>Answers</b> — what am I doing right now?"]
+
+  L2["<b>L2 · DURABLE LEDGER</b> — Firestore<br/>─────────────────────────<br/>reviews · completed_steps · step_results · events<br/>findings · qa_responses · screenings · approvals<br/>idempotency keys · score breakdowns<br/><br/><b>Lifetime</b> — forever, immutable<br/><b>Answers</b> — what happened, exactly?"]
+
+  DISTILL{"<b>Distillation, at review close</b><br/>and at notable events only<br/><br/>write what changes a future decision —<br/>outcome, negotiated exceptions,<br/>conduct flags, contact changes"}
+
+  L3["<b>L3 · VENDOR MEMORY</b> — Memory Bank<br/>─────────────────────────<br/>vendor dossier — prior reviews, negotiated exceptions,<br/>contacts, the adversarial conduct flag<br/>org policy memory — we always require SOC 2 Type II<br/>for data processors<br/><br/><b>Lifetime</b> — across reviews and years<br/><b>Answers</b> — what is worth knowing next time?"]
+
+  DUMP["<b>The anti-pattern</b><br/>dumping the whole review transcript into memory<br/>turns L3 into a slower, dumber L2"]
+
+  RECALL["<b>The payoff, on review two</b><br/>months later the fleet opens the second review<br/>with the prior negotiation history already in hand —<br/>and a vendor's adversarial flag still attached"]
+
+  L1 -- "durable write at every checkpoint" --> L2
+  L2 --> DISTILL
+  DISTILL -- "kept" --> L3
+  DISTILL -. "rejected" .-> DUMP
+  L3 -- "recalled at intake, before planning" --> RECALL
+  RECALL -. "seeds the next session" .-> L1
+
+  classDef l1 fill:#e0f2fe,stroke:#0369a1,stroke-width:2px,color:#0c4a6e
+  classDef l2 fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+  classDef l3 fill:#f3e8ff,stroke:#7e22ce,stroke-width:2px,color:#581c87
+  classDef rule fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+  classDef bad fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#7f1d1d
+  class L1 l1
+  class L2 l2
+  class L3 l3
+  class DISTILL,RECALL rule
+  class DUMP bad

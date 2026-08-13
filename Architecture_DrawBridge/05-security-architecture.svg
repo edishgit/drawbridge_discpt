@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1110" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1240" height="1110" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="1239" height="1109" fill="none" stroke="#E2E8F0"/>
+<text x="48" y="46" font-size="22" font-weight="700" fill="#0F172A">Security architecture — zero trust for a fleet of agents</text>
+<text x="48" y="70" font-size="13" fill="#64748B">Defense in depth: screen the content, police the calls, scope every identity, protect the data, prove it all</text>
+
+<rect x="48" y="104" width="1144" height="100" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="64" y="126" font-size="12" font-weight="600" fill="#475569">Entry points</text>
+<rect x="68" y="136" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#F87171" stroke-width="1.25"/>
+<text x="238" y="158" font-size="13.5" font-weight="600" fill="#B91C1C" text-anchor="middle">Vendor portal</text>
+<text x="238" y="176" font-size="11.5" fill="#64748B" text-anchor="middle">public · receives untrusted uploads</text>
+<rect x="450" y="136" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#F87171" stroke-width="1.25"/>
+<text x="620" y="158" font-size="13.5" font-weight="600" fill="#B91C1C" text-anchor="middle">Email ingest</text>
+<text x="620" y="176" font-size="11.5" fill="#64748B" text-anchor="middle">vendor replies (untrusted)</text>
+<rect x="832" y="136" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="1002" y="158" font-size="13.5" font-weight="600" fill="#3730A3" text-anchor="middle">Internal dashboard</text>
+<text x="1002" y="176" font-size="11.5" fill="#64748B" text-anchor="middle">authenticated staff only</text>
+<line x1="238" y1="196" x2="238" y2="268" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="620" y1="196" x2="620" y2="268" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<path d="M1002 196 L1002 214 L1140 214 L1140 400" fill="none" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="1132" y="300" font-size="10.5" fill="#64748B" text-anchor="end">trusted path</text>
+
+<rect x="48" y="240" width="1040" height="100" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+<text x="64" y="262" font-size="12" font-weight="600" fill="#B91C1C">Content screening — every vendor-origin byte</text>
+<rect x="68" y="272" width="980" height="52" rx="8" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.25"/>
+<text x="88" y="294" font-size="13.5" font-weight="600" fill="#991B1B">In-VPC Gemma scrub → Model Armor</text>
+<text x="88" y="312" font-size="11.5" fill="#64748B">prompt injection · tool poisoning · PII · hidden-text payloads</text>
+<line x1="558" y1="328" x2="558" y2="402" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="376" width="1144" height="100" rx="10" fill="#FFFBEB" stroke="#FDE68A"/>
+<text x="64" y="398" font-size="12" font-weight="600" fill="#B45309">Gateway policy — enforced at the chokepoint, not by prompt hygiene</text>
+<rect x="68" y="408" width="340" height="52" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.25"/>
+<text x="238" y="428" font-size="13" font-weight="600" fill="#92400E" text-anchor="middle">P1 · outbound email</text>
+<text x="238" y="447" font-size="11.5" fill="#64748B" text-anchor="middle">needs a human approval token</text>
+<rect x="450" y="408" width="340" height="52" rx="8" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.25"/>
+<text x="620" y="428" font-size="13" font-weight="600" fill="#991B1B" text-anchor="middle">P2 · model input</text>
+<text x="620" y="447" font-size="11.5" fill="#64748B" text-anchor="middle">must carry the armor stamp</text>
+<rect x="832" y="408" width="340" height="52" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="1002" y="428" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Limits</text>
+<text x="1002" y="447" font-size="11.5" fill="#64748B" text-anchor="middle">rate · egress · spend guards</text>
+<line x1="630" y1="460" x2="630" y2="500" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="504" width="1144" height="230" rx="10" fill="#F0FDFA" stroke="#99F6E4"/>
+<text x="64" y="526" font-size="12" font-weight="600" fill="#0F766E">Identity — one service account per agent · least privilege by construction</text>
+<g>
+<rect x="68" y="544" width="205" height="160" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="82" y="568" font-size="12.5" font-weight="600" fill="#0F766E">Orchestrator</text>
+<text x="82" y="594" font-size="11" fill="#15803D">✓ state read-write</text>
+<text x="82" y="618" font-size="11" fill="#15803D">✓ dispatch via gateway</text>
+<text x="82" y="642" font-size="11" fill="#DC2626">✗ send email</text>
+<text x="82" y="666" font-size="11" fill="#DC2626">✗ read evidence</text>
+<rect x="291" y="544" width="205" height="160" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="305" y="568" font-size="12.5" font-weight="600" fill="#0F766E">Questionnaire</text>
+<text x="305" y="594" font-size="11" fill="#15803D">✓ email (with P1)</text>
+<text x="305" y="618" font-size="11" fill="#15803D">✓ portal write</text>
+<text x="305" y="642" font-size="11" fill="#DC2626">✗ internal data</text>
+<text x="305" y="666" font-size="11" fill="#DC2626">✗ evidence bucket</text>
+<rect x="514" y="544" width="205" height="160" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="528" y="568" font-size="12.5" font-weight="600" fill="#0F766E">Evidence</text>
+<text x="528" y="594" font-size="11" fill="#15803D">✓ storage read-only</text>
+<text x="528" y="618" font-size="11" fill="#15803D">✓ armor verdicts</text>
+<text x="528" y="642" font-size="11" fill="#DC2626">✗ network egress</text>
+<text x="528" y="666" font-size="11" fill="#DC2626">✗ email</text>
+<rect x="737" y="544" width="205" height="160" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="751" y="568" font-size="12.5" font-weight="600" fill="#0F766E">Risk scorer</text>
+<text x="751" y="594" font-size="11" fill="#15803D">✓ ledger read</text>
+<text x="751" y="618" font-size="11" fill="#15803D">✓ rubric config</text>
+<text x="751" y="642" font-size="11" fill="#DC2626">✗ external calls</text>
+<text x="751" y="666" font-size="11" fill="#DC2626">✗ approvals</text>
+<rect x="960" y="544" width="205" height="160" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="974" y="568" font-size="12.5" font-weight="600" fill="#0F766E">Watchdog</text>
+<text x="974" y="594" font-size="11" fill="#15803D">✓ feeds via gateway</text>
+<text x="974" y="618" font-size="11" fill="#15803D">✓ open re-review</text>
+<text x="974" y="642" font-size="11" fill="#DC2626">✗ approve vendors</text>
+<text x="974" y="666" font-size="11" fill="#DC2626">✗ email</text>
+</g>
+<line x1="630" y1="734" x2="630" y2="774" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="778" width="1144" height="100" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="64" y="800" font-size="12" font-weight="600" fill="#475569">Data protection</text>
+<rect x="68" y="810" width="340" height="52" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="238" y="830" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Secret Manager</text>
+<text x="238" y="849" font-size="11.5" fill="#64748B" text-anchor="middle">zero credentials in code</text>
+<rect x="450" y="810" width="340" height="52" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="620" y="830" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Encryption + TLS</text>
+<text x="620" y="849" font-size="11.5" fill="#64748B" text-anchor="middle">at rest and in transit</text>
+<rect x="832" y="810" width="340" height="52" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="1002" y="830" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Bucket separation</text>
+<text x="1002" y="849" font-size="11.5" fill="#64748B" text-anchor="middle">quarantine → clean promotion</text>
+<line x1="630" y1="862" x2="630" y2="902" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="906" width="1144" height="100" rx="10" fill="#FAF5FF" stroke="#E9D5FF"/>
+<text x="64" y="928" font-size="12" font-weight="600" fill="#7E22CE">Audit — tamper-evident by construction</text>
+<rect x="68" y="938" width="1104" height="52" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.25"/>
+<text x="88" y="960" font-size="13.5" font-weight="600" fill="#6B21A8">Immutable event ledger + OpenTelemetry reasoning traces</text>
+<text x="88" y="978" font-size="11.5" fill="#64748B">→ one-click Audit Binder for regulators, auditors, and judges</text>
+
+<text x="1192" y="1082" font-size="11" fill="#94A3B8" text-anchor="end">Drawbridge · the agent that reads evidence cannot email — the agent that emails cannot touch your data</text>
+</svg>

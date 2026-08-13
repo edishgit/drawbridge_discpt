@@ -1,0 +1,65 @@
+---
+title: "Drawbridge — Technology stack"
+---
+mindmap
+  root((Drawbridge))
+    Gemini Enterprise Agent Platform
+      Agent Runtime on Vertex AI Agent Engine
+      Memory Bank for vendor dossiers
+      Agent Gateway policy chokepoint
+      Agent Registry publication v1.2
+      Model Armor content screening
+    Models
+      Gemini 3.5 Flash default
+        Reply parsing
+        Control extraction
+        Rubric severity
+        Chase messages
+      Gemini Pro sparingly
+        Cross-examination
+        CISO risk memo
+      Gemma 3 in-VPC
+        PII scrubbing before egress
+        Data sovereignty story
+    Agent framework
+      ADK Python
+      Five agents one identity each
+      Pydantic typed contracts
+      Shared kernel of six modules
+    Google Cloud infrastructure
+      Cloud Run
+        Vendor portal
+        Internal dashboard
+        Inbox simulator
+        Binder service
+      Pub/Sub with dead letter topics
+      Firestore native mode ledger
+      Cloud Storage three buckets
+        Quarantine
+        Clean and stamped
+        Binders
+      Secret Manager approval signing key
+      Artifact Registry and Cloud Build
+      Cloud Scheduler for sweeps
+    Observability
+      OpenTelemetry spans
+      Cloud Trace waterfall
+      Cloud Logging policy blocks
+      Per review cost meter
+    Security and governance
+      Five least privilege service accounts
+      Policy P1 human approved first contact
+      Policy P2 stamped content only
+      Signed single use scoped tokens
+      IAM boundary tests that must fail
+    Frontend
+      Next.js 14 and TypeScript
+      Tailwind CSS
+      Time compression demo clock
+      Skeleton loaders and real empty states
+    Engineering discipline
+      Idempotency keys derived from workflow position
+      Checkpointed resumable steps
+      State machine that refuses to guess
+      Five tests carrying the architectural claim
+      Synthetic vendor pack shipped in repo

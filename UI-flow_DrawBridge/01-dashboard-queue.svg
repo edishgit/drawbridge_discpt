@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 820" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<rect width="1240" height="820" fill="#0B0D10"/>
+<rect x="0.5" y="0.5" width="1239" height="819" fill="none" stroke="#1C2128"/>
+<!-- sidebar -->
+<rect x="0" y="0" width="232" height="820" fill="#0E1116"/>
+<line x1="232" y1="0" x2="232" y2="820" stroke="#1C2128"/>
+<rect x="24" y="28" width="20" height="20" rx="5" fill="#4F7CFF"/>
+<text x="54" y="43" font-size="15" font-weight="700" fill="#E6EAF0">Drawbridge</text>
+<text x="24" y="88" font-size="10.5" font-weight="600" fill="#5B6673" letter-spacing="0.8">WORKSPACE</text>
+<rect x="16" y="100" width="200" height="34" rx="8" fill="#161B22"/>
+<rect x="16" y="100" width="3" height="34" rx="1.5" fill="#4F7CFF"/>
+<text x="40" y="122" font-size="13" font-weight="600" fill="#E6EAF0">Reviews</text>
+<text x="196" y="122" font-size="11" fill="#5B6673" text-anchor="end">24</text>
+<text x="40" y="164" font-size="13" fill="#8B97A6">Vendors</text>
+<text x="40" y="200" font-size="13" fill="#8B97A6">Watchlist</text>
+<text x="40" y="236" font-size="13" fill="#8B97A6">Binders</text>
+<text x="24" y="300" font-size="10.5" font-weight="600" fill="#5B6673" letter-spacing="0.8">FLEET</text>
+<circle cx="30" cy="330" r="4" fill="#3FB950"/><text x="44" y="335" font-size="12.5" fill="#8B97A6">Orchestrator</text>
+<circle cx="30" cy="360" r="4" fill="#3FB950"/><text x="44" y="365" font-size="12.5" fill="#8B97A6">Questionnaire</text>
+<circle cx="30" cy="390" r="4" fill="#3FB950"/><text x="44" y="395" font-size="12.5" fill="#8B97A6">Evidence</text>
+<circle cx="30" cy="420" r="4" fill="#3FB950"/><text x="44" y="425" font-size="12.5" fill="#8B97A6">Risk scorer</text>
+<circle cx="30" cy="450" r="4" fill="#D29922"/><text x="44" y="455" font-size="12.5" fill="#8B97A6">Watchdog</text>
+<circle cx="30" cy="780" r="10" fill="#22303F"/><text x="52" y="784" font-size="12" fill="#8B97A6">Priya · analyst</text>
+
+<!-- top bar -->
+<text x="264" y="52" font-size="20" font-weight="700" fill="#E6EAF0">Reviews</text>
+<rect x="880" y="30" width="220" height="34" rx="8" fill="#161B22" stroke="#1C2128"/>
+<text x="900" y="52" font-size="12.5" fill="#5B6673">Search vendors…</text>
+<rect x="1116" y="30" width="100" height="34" rx="8" fill="#4F7CFF"/>
+<text x="1166" y="52" font-size="12.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">New review</text>
+
+<!-- status strip -->
+<rect x="264" y="80" width="952" height="52" rx="10" fill="#0E1116" stroke="#1C2128"/>
+<text x="288" y="104" font-size="11" fill="#5B6673">ACTIVE</text><text x="288" y="122" font-size="15" font-weight="700" fill="#E6EAF0">7</text>
+<text x="420" y="104" font-size="11" fill="#5B6673">NEEDS YOU</text><text x="420" y="122" font-size="15" font-weight="700" fill="#D29922">2</text>
+<text x="560" y="104" font-size="11" fill="#5B6673">EVENTS TODAY</text><text x="560" y="122" font-size="15" font-weight="700" fill="#E6EAF0">1,284</text>
+<text x="720" y="104" font-size="11" fill="#5B6673">SPEND TODAY</text><text x="720" y="122" font-size="15" font-weight="700" fill="#3FB950">$3.11</text>
+<text x="900" y="104" font-size="11" fill="#5B6673">AVG / REVIEW</text><text x="900" y="122" font-size="15" font-weight="700" fill="#3FB950">$0.42</text>
+
+<!-- column headers -->
+<text x="288" y="164" font-size="10.5" font-weight="600" fill="#5B6673">VENDOR</text>
+<text x="620" y="164" font-size="10.5" font-weight="600" fill="#5B6673">STAGE</text>
+<text x="840" y="164" font-size="10.5" font-weight="600" fill="#5B6673">ELAPSED</text>
+<text x="960" y="164" font-size="10.5" font-weight="600" fill="#5B6673">SCORE</text>
+<text x="1180" y="164" font-size="10.5" font-weight="600" fill="#5B6673" text-anchor="end">STATUS</text>
+
+<!-- row: NimbusWrite (adversarial) -->
+<rect x="264" y="176" width="952" height="66" rx="10" fill="#12171E" stroke="#2A2020"/>
+<rect x="264" y="176" width="3" height="66" rx="1.5" fill="#F85149"/>
+<text x="288" y="205" font-size="14" font-weight="600" fill="#E6EAF0">NimbusWrite AI</text>
+<rect x="288" y="214" width="52" height="18" rx="4" fill="#1F2A1A"/><text x="314" y="227" font-size="10" fill="#7EE787" text-anchor="middle">Tier 1</text>
+<rect x="346" y="214" width="42" height="18" rx="4" fill="#2A1F1A"/><text x="367" y="227" font-size="10" fill="#F0883E" text-anchor="middle">AI SaaS</text>
+<text x="620" y="213" font-size="12.5" fill="#8B97A6">Scoring</text>
+<text x="840" y="213" font-size="12.5" fill="#8B97A6">6 days</text>
+<text x="960" y="213" font-size="15" font-weight="700" fill="#F85149">38</text>
+<rect x="1092" y="197" width="124" height="24" rx="6" fill="#2A1215"/><text x="1154" y="213" font-size="10.5" font-weight="600" fill="#F85149" text-anchor="middle">⚠ Adversarial</text>
+
+<!-- row: DataDynamo (conditional) -->
+<rect x="264" y="252" width="952" height="66" rx="10" fill="#12171E" stroke="#1C2128"/>
+<rect x="264" y="252" width="3" height="66" rx="1.5" fill="#D29922"/>
+<text x="288" y="281" font-size="14" font-weight="600" fill="#E6EAF0">DataDynamo Logistics</text>
+<rect x="288" y="290" width="52" height="18" rx="4" fill="#1F2A1A"/><text x="314" y="303" font-size="10" fill="#7EE787" text-anchor="middle">Tier 1</text>
+<text x="620" y="289" font-size="12.5" fill="#8B97A6">Awaiting you</text>
+<text x="840" y="289" font-size="12.5" fill="#8B97A6">9 days</text>
+<text x="960" y="289" font-size="15" font-weight="700" fill="#D29922">71</text>
+<rect x="1074" y="273" width="142" height="24" rx="6" fill="#2A2412"/><text x="1145" y="289" font-size="10.5" font-weight="600" fill="#D29922" text-anchor="middle">Approve · conditional</text>
+
+<!-- row: CleanCloud (approved) -->
+<rect x="264" y="328" width="952" height="66" rx="10" fill="#12171E" stroke="#1C2128"/>
+<rect x="264" y="328" width="3" height="66" rx="1.5" fill="#3FB950"/>
+<text x="288" y="357" font-size="14" font-weight="600" fill="#E6EAF0">CleanCloud Analytics</text>
+<rect x="288" y="366" width="52" height="18" rx="4" fill="#20241A"/><text x="314" y="379" font-size="10" fill="#B9C08A" text-anchor="middle">Tier 2</text>
+<text x="620" y="365" font-size="12.5" fill="#8B97A6">Monitored</text>
+<text x="840" y="365" font-size="12.5" fill="#8B97A6">14 days</text>
+<text x="960" y="365" font-size="15" font-weight="700" fill="#3FB950">86</text>
+<rect x="1112" y="349" width="104" height="24" rx="6" fill="#132417"/><text x="1164" y="365" font-size="10.5" font-weight="600" fill="#3FB950" text-anchor="middle">Approved</text>
+
+<!-- ghost rows -->
+<rect x="264" y="404" width="952" height="66" rx="10" fill="#0E1319" stroke="#171C23"/>
+<text x="288" y="437" font-size="14" fill="#3A434F">Meridian Payroll</text>
+<text x="620" y="437" font-size="12.5" fill="#3A434F">Questionnaire out</text>
+<text x="840" y="437" font-size="12.5" fill="#3A434F">2 days</text><text x="960" y="437" font-size="14" fill="#3A434F">—</text>
+<rect x="264" y="480" width="952" height="66" rx="10" fill="#0E1319" stroke="#171C23"/>
+<text x="288" y="513" font-size="14" fill="#3A434F">Northwind CDN</text>
+<text x="620" y="513" font-size="12.5" fill="#3A434F">Evidence review</text>
+<text x="840" y="513" font-size="12.5" fill="#3A434F">4 days</text><text x="960" y="513" font-size="14" fill="#3A434F">—</text>
+
+<text x="264" y="600" font-size="11" fill="#5B6673">01 · Queue — the opening shot. One accent per state, generous rows, a live status strip that ticks during the demo.</text>
+<text x="1216" y="792" font-size="11" fill="#3A434F" text-anchor="end">Drawbridge UI · dashboard / reviews queue</text>
+</svg>

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1200" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1240" height="1200" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="1239" height="1199" fill="none" stroke="#E2E8F0"/>
+<text x="48" y="52" font-size="22" font-weight="700" fill="#0F172A">Drawbridge — system architecture</text>
+<text x="48" y="76" font-size="13" fill="#64748B">An autonomous vendor-trust fleet on the Gemini Enterprise Agent Platform · every layer maps to a judged capability</text>
+
+<rect x="48" y="100" width="1144" height="100" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="64" y="122" font-size="12" font-weight="600" fill="#475569">Actors</text>
+<g>
+<rect x="68" y="132" width="250" height="56" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="193" y="154" font-size="13.5" font-weight="600" fill="#334155" text-anchor="middle">Procurement</text>
+<text x="193" y="172" font-size="11.5" fill="#64748B" text-anchor="middle">kicks off reviews</text>
+<rect x="352" y="132" width="250" height="56" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="477" y="154" font-size="13.5" font-weight="600" fill="#334155" text-anchor="middle">Security analyst</text>
+<text x="477" y="172" font-size="11.5" fill="#64748B" text-anchor="middle">owns the queue</text>
+<rect x="636" y="132" width="250" height="56" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.25"/>
+<text x="761" y="154" font-size="13.5" font-weight="600" fill="#92400E" text-anchor="middle">CISO approver</text>
+<text x="761" y="172" font-size="11.5" fill="#64748B" text-anchor="middle">human gate G1</text>
+<rect x="920" y="132" width="250" height="56" rx="8" fill="#FFFFFF" stroke="#F87171" stroke-width="1.25"/>
+<text x="1045" y="154" font-size="13.5" font-weight="600" fill="#B91C1C" text-anchor="middle">Vendor contact</text>
+<text x="1045" y="172" font-size="11.5" fill="#64748B" text-anchor="middle">external · untrusted</text>
+</g>
+<line x1="193" y1="192" x2="193" y2="230" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="477" y1="192" x2="477" y2="230" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="761" y1="192" x2="761" y2="230" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="1045" y1="192" x2="1045" y2="230" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="236" width="1144" height="100" rx="10" fill="#EEF2FF" stroke="#C7D2FE"/>
+<text x="64" y="258" font-size="12" font-weight="600" fill="#4338CA">Experience layer — Cloud Run</text>
+<rect x="68" y="268" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="238" y="290" font-size="13.5" font-weight="600" fill="#3730A3" text-anchor="middle">Vendor portal</text>
+<text x="238" y="308" font-size="11.5" fill="#64748B" text-anchor="middle">uploads · questionnaire UI</text>
+<rect x="450" y="268" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="620" y="290" font-size="13.5" font-weight="600" fill="#334155" text-anchor="middle">Email channel</text>
+<text x="620" y="308" font-size="11.5" fill="#64748B" text-anchor="middle">delivery · replies (simulated inbox)</text>
+<rect x="832" y="268" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="1002" y="290" font-size="13.5" font-weight="600" fill="#3730A3" text-anchor="middle">Internal dashboard</text>
+<text x="1002" y="308" font-size="11.5" fill="#64748B" text-anchor="middle">timeline · gates · binder</text>
+<line x1="238" y1="328" x2="238" y2="398" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="620" y1="328" x2="620" y2="398" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="1002" y1="328" x2="1002" y2="398" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="372" width="1144" height="112" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+<text x="64" y="394" font-size="12" font-weight="600" fill="#B91C1C">Trust boundary — screen every external byte, police every call</text>
+<rect x="68" y="404" width="640" height="56" rx="8" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.25"/>
+<text x="388" y="426" font-size="13.5" font-weight="600" fill="#991B1B" text-anchor="middle">Model Armor</text>
+<text x="388" y="444" font-size="11.5" fill="#64748B" text-anchor="middle">prompt injection · tool poisoning · PII screening</text>
+<rect x="748" y="404" width="444" height="56" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="970" y="426" font-size="13.5" font-weight="600" fill="#3730A3" text-anchor="middle">Agent Gateway</text>
+<text x="970" y="444" font-size="11.5" fill="#64748B" text-anchor="middle">P1 email token · P2 armor stamp</text>
+<line x1="708" y1="432" x2="744" y2="432" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<line x1="630" y1="488" x2="630" y2="548" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="520" width="1144" height="96" rx="10" fill="#EEF2FF" stroke="#C7D2FE"/>
+<text x="64" y="542" font-size="12" font-weight="600" fill="#4338CA">Event backbone</text>
+<rect x="68" y="552" width="1104" height="48" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="88" y="580" font-size="13.5" font-weight="600" fill="#3730A3">Cloud Pub/Sub</text>
+<text x="230" y="580" font-size="11.5" fill="#64748B">intake · reply-received · evidence-uploaded · score-ready · approved · watchdog-hit</text>
+<line x1="630" y1="604" x2="630" y2="648" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="652" width="1144" height="210" rx="10" fill="#F0FDFA" stroke="#99F6E4"/>
+<text x="64" y="674" font-size="12" font-weight="600" fill="#0F766E">Agent fleet — Vertex AI Agent Engine · long-running · resumable · idempotent</text>
+<rect x="410" y="688" width="440" height="52" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="630" y="709" font-size="13.5" font-weight="600" fill="#0F766E" text-anchor="middle">Orchestrator</text>
+<text x="630" y="727" font-size="11.5" fill="#64748B" text-anchor="middle">plans · dispatches · enforces gates</text>
+<line x1="630" y1="740" x2="195" y2="764" stroke="#94A3B8" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="630" y1="740" x2="478" y2="764" stroke="#94A3B8" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="630" y1="740" x2="761" y2="764" stroke="#94A3B8" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="630" y1="740" x2="1044" y2="764" stroke="#94A3B8" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="68" y="768" width="255" height="64" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="195" y="792" font-size="13" font-weight="600" fill="#0F766E" text-anchor="middle">Questionnaire agent</text>
+<text x="195" y="812" font-size="11" fill="#64748B" text-anchor="middle">generates · sends · parses · chases</text>
+<rect x="351" y="768" width="255" height="64" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="478" y="792" font-size="13" font-weight="600" fill="#0F766E" text-anchor="middle">Evidence agent</text>
+<text x="478" y="812" font-size="11" fill="#64748B" text-anchor="middle">reads SOC 2 · cross-examines</text>
+<rect x="634" y="768" width="255" height="64" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="761" y="792" font-size="13" font-weight="600" fill="#0F766E" text-anchor="middle">Risk scorer</text>
+<text x="761" y="812" font-size="11" fill="#64748B" text-anchor="middle">rubric 0–100 · Pro memo</text>
+<rect x="917" y="768" width="255" height="64" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="1044" y="792" font-size="13" font-weight="600" fill="#0F766E" text-anchor="middle">Watchdog</text>
+<text x="1044" y="812" font-size="11" fill="#64748B" text-anchor="middle">post-approval sweeps</text>
+<line x1="630" y1="866" x2="630" y2="924" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="898" width="1144" height="100" rx="10" fill="#FAF5FF" stroke="#E9D5FF"/>
+<text x="64" y="920" font-size="12" font-weight="600" fill="#7E22CE">State and memory</text>
+<rect x="68" y="930" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.25"/>
+<text x="238" y="952" font-size="13.5" font-weight="600" fill="#6B21A8" text-anchor="middle">Firestore</text>
+<text x="238" y="970" font-size="11.5" fill="#64748B" text-anchor="middle">workflow ledger · idempotency keys</text>
+<rect x="450" y="930" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.25"/>
+<text x="620" y="952" font-size="13.5" font-weight="600" fill="#6B21A8" text-anchor="middle">Memory Bank</text>
+<text x="620" y="970" font-size="11.5" fill="#64748B" text-anchor="middle">vendor dossiers · policy memory</text>
+<rect x="832" y="930" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.25"/>
+<text x="1002" y="952" font-size="13.5" font-weight="600" fill="#6B21A8" text-anchor="middle">Cloud Storage</text>
+<text x="1002" y="970" font-size="11.5" fill="#64748B" text-anchor="middle">evidence vault: quarantine → clean</text>
+<line x1="630" y1="990" x2="630" y2="1060" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+
+<rect x="48" y="1034" width="1144" height="100" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="64" y="1056" font-size="12" font-weight="600" fill="#475569">Governance and observability</text>
+<rect x="68" y="1066" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="238" y="1088" font-size="13.5" font-weight="600" fill="#334155" text-anchor="middle">Agent Registry</text>
+<text x="238" y="1106" font-size="11.5" fill="#64748B" text-anchor="middle">fleet published · versioned</text>
+<rect x="450" y="1066" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="620" y="1088" font-size="13.5" font-weight="600" fill="#334155" text-anchor="middle">Per-agent IAM</text>
+<text x="620" y="1106" font-size="11.5" fill="#64748B" text-anchor="middle">least-privilege identities</text>
+<rect x="832" y="1066" width="340" height="56" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="1002" y="1088" font-size="13.5" font-weight="600" fill="#334155" text-anchor="middle">Cloud Trace → Audit Binder</text>
+<text x="1002" y="1106" font-size="11.5" fill="#64748B" text-anchor="middle">reasoning spans → evidence pack</text>
+
+<text x="1192" y="1172" font-size="11" fill="#94A3B8" text-anchor="end">Drawbridge · Autonomous vendor-trust fleet · Fortified Enterprise Fleet track</text>
+</svg>

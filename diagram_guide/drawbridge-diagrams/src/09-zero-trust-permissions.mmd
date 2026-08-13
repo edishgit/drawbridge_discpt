@@ -1,0 +1,54 @@
+---
+title: "Drawbridge — Zero-trust fleet identity: the permission matrix is a deliverable, not config"
+---
+flowchart LR
+  subgraph FLEET["FIVE AGENT IDENTITIES — no shared credential exists anywhere in the fleet"]
+    direction TB
+    SA1["<b>sa-orchestrator</b>"]
+    SA2["<b>sa-questionnaire</b>"]
+    SA3["<b>sa-evidence</b>"]
+    SA4["<b>sa-scorer</b>"]
+    SA5["<b>sa-watchdog</b>"]
+  end
+
+  G1["Firestore state read and write<br/>Pub/Sub publish and subscribe<br/>Vertex AI user"]
+  G2["Pub/Sub · Vertex AI user<br/>portal write<br/>email send <i>via gateway only</i>"]
+  G3["Clean bucket, <b>read only</b><br/>findings write<br/>Vertex AI user"]
+  G4["Firestore read · score write<br/>Vertex AI user"]
+  G5["Pub/Sub publish<br/>outbound fetch <i>via gateway</i><br/>re-review task write"]
+
+  D1["email send · Storage read<br/>approval write"]
+  D2["findings write<br/>Storage read"]
+  D3["<b>any</b> network egress · email<br/>quarantine bucket"]
+  D4["external calls<br/>approvals write"]
+  D5["approvals · email<br/>vendor data write"]
+
+  SA1 --> G1
+  SA2 --> G2
+  SA3 --> G3
+  SA4 --> G4
+  SA5 --> G5
+  SA1 -. "never granted" .-> D1
+  SA2 -. "never granted" .-> D2
+  SA3 -. "never granted" .-> D3
+  SA4 -. "never granted" .-> D4
+  SA5 -. "never granted" .-> D5
+
+  SVC["<b>Plus three service identities</b> — vendor portal, dashboard and binder,<br/>inbox simulator. None of them can call a model or write a finding."]
+  TEST["<b>tests/test_iam_boundaries.py</b><br/>attempts one denied action per agent and asserts it fails.<br/>A test that fails as expected is a feature — screenshot it."]
+  WHY["<b>Why it is load-bearing</b><br/>a fleet holding one god-credential is a single injection away<br/>from disaster. Least privilege is what makes the screening story<br/>true end to end — the agent that reads evidence cannot email,<br/>and the agent that emails cannot touch internal data."]
+
+  FLEET -.-> SVC
+  D3 --> TEST
+  TEST -.-> WHY
+
+  classDef sa fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef cap fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+  classDef den fill:#fee2e2,stroke:#b91c1c,stroke-width:2px,color:#7f1d1d
+  classDef note fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+  classDef test fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+  class SA1,SA2,SA3,SA4,SA5 sa
+  class G1,G2,G3,G4,G5 cap
+  class D1,D2,D3,D4,D5 den
+  class SVC,WHY note
+  class TEST test

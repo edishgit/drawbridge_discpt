@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 820" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<rect width="1240" height="820" fill="#0B0D10"/>
+<rect x="0.5" y="0.5" width="1239" height="819" fill="none" stroke="#1C2128"/>
+<text x="48" y="52" font-size="22" font-weight="700" fill="#E6EAF0">Design system</text>
+<text x="48" y="76" font-size="13" fill="#8B97A6">Restraint from Linear, confident dark surfaces from Google for Developers · one accent, semantic state colors, everything on an 8-pt grid</text>
+
+<!-- surfaces -->
+<text x="48" y="120" font-size="11" font-weight="600" fill="#5B6673">SURFACES</text>
+<rect x="48" y="132" width="150" height="70" rx="8" fill="#0B0D10" stroke="#1C2128"/><text x="60" y="176" font-size="11" fill="#8B97A6">canvas #0B0D10</text>
+<rect x="212" y="132" width="150" height="70" rx="8" fill="#0E1116" stroke="#1C2128"/><text x="224" y="176" font-size="11" fill="#8B97A6">raised #0E1116</text>
+<rect x="376" y="132" width="150" height="70" rx="8" fill="#12171E" stroke="#22262D"/><text x="388" y="176" font-size="11" fill="#8B97A6">card #12171E</text>
+<rect x="540" y="132" width="150" height="70" rx="8" fill="#161B22" stroke="#22262D"/><text x="552" y="176" font-size="11" fill="#8B97A6">input #161B22</text>
+<rect x="704" y="132" width="150" height="70" rx="8" fill="#22262D"/><text x="716" y="176" font-size="11" fill="#8B97A6">border #22262D</text>
+
+<!-- accent + states -->
+<text x="48" y="240" font-size="11" font-weight="600" fill="#5B6673">ACCENT &amp; SEMANTIC STATE</text>
+<rect x="48" y="252" width="180" height="70" rx="8" fill="#4F7CFF"/><text x="60" y="296" font-size="11" font-weight="600" fill="#FFFFFF">accent #4F7CFF</text>
+<rect x="242" y="252" width="150" height="70" rx="8" fill="#3FB950"/><text x="254" y="296" font-size="11" font-weight="600" fill="#08210F">approve #3FB950</text>
+<rect x="406" y="252" width="150" height="70" rx="8" fill="#D29922"/><text x="418" y="296" font-size="11" font-weight="600" fill="#241802">conditional #D29922</text>
+<rect x="570" y="252" width="150" height="70" rx="8" fill="#F85149"/><text x="582" y="296" font-size="11" font-weight="600" fill="#2A0B0A">escalate #F85149</text>
+<rect x="734" y="252" width="150" height="70" rx="8" fill="#A371F7"/><text x="746" y="296" font-size="11" font-weight="600" fill="#1A1030">human #A371F7</text>
+<rect x="898" y="252" width="150" height="70" rx="8" fill="#F0883E"/><text x="910" y="296" font-size="11" font-weight="600" fill="#2A1602">warn #F0883E</text>
+
+<!-- text colors -->
+<text x="48" y="360" font-size="11" font-weight="600" fill="#5B6673">TEXT</text>
+<text x="48" y="392" font-size="20" font-weight="700" fill="#E6EAF0">Primary #E6EAF0</text>
+<text x="360" y="392" font-size="20" fill="#8B97A6">Secondary #8B97A6</text>
+<text x="700" y="392" font-size="20" fill="#5B6673">Muted #5B6673</text>
+<text x="990" y="392" font-size="20" fill="#3A434F">Ghost #3A434F</text>
+
+<!-- type scale -->
+<text x="48" y="448" font-size="11" font-weight="600" fill="#5B6673">TYPE · Inter (UI) · JetBrains Mono (data/spans)</text>
+<text x="48" y="486" font-size="28" font-weight="800" fill="#E6EAF0">Display / 28 / 800</text>
+<text x="48" y="520" font-size="20" font-weight="700" fill="#E6EAF0">Title / 20 / 700</text>
+<text x="48" y="548" font-size="14" font-weight="600" fill="#E6EAF0">Body strong / 14 / 600</text>
+<text x="48" y="572" font-size="13" fill="#8B97A6">Body / 13 / 400</text>
+<text x="48" y="594" font-size="11" font-weight="600" fill="#5B6673" letter-spacing="0.6">EYEBROW / 11 / 600 / +0.6</text>
+<text x="360" y="486" font-size="15" font-family="'JetBrains Mono',monospace" fill="#7EE787">gemini-3.5-flash · $0.011</text>
+<text x="360" y="512" font-size="13" font-family="'JetBrains Mono',monospace" fill="#8B97A6">R-2041 · idem:send:v1</text>
+
+<!-- components -->
+<text x="640" y="448" font-size="11" font-weight="600" fill="#5B6673">COMPONENTS</text>
+<rect x="640" y="462" width="140" height="40" rx="10" fill="#4F7CFF"/><text x="710" y="487" font-size="12.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">Primary</text>
+<rect x="792" y="462" width="140" height="40" rx="10" fill="#161B22" stroke="#22262D"/><text x="862" y="487" font-size="12.5" font-weight="600" fill="#8B97A6" text-anchor="middle">Secondary</text>
+<rect x="944" y="462" width="150" height="40" rx="10" fill="#12171E" stroke="#2A2020"/><text x="1019" y="487" font-size="12.5" font-weight="600" fill="#F85149" text-anchor="middle">Destructive</text>
+<rect x="640" y="516" width="90" height="26" rx="6" fill="#1F2A1A"/><text x="685" y="533" font-size="10.5" fill="#7EE787" text-anchor="middle">Tier 1</text>
+<rect x="742" y="516" width="120" height="26" rx="6" fill="#2A1215"/><text x="802" y="533" font-size="10.5" font-weight="600" fill="#F85149" text-anchor="middle">⚠ Adversarial</text>
+<rect x="874" y="516" width="130" height="26" rx="6" fill="#2A2412"/><text x="939" y="533" font-size="10.5" font-weight="600" fill="#D29922" text-anchor="middle">Conditional</text>
+
+<!-- radii + spacing -->
+<text x="640" y="574" font-size="11" font-weight="600" fill="#5B6673">RADII 6 / 8 / 10 / 12 / 16   ·   SPACE 8-pt grid   ·   BORDER 1px #22262D</text>
+
+<!-- principles -->
+<rect x="48" y="620" width="1144" height="130" rx="12" fill="#0E1116" stroke="#1C2128"/>
+<text x="72" y="650" font-size="12" font-weight="600" fill="#E6EAF0">Rules</text>
+<text x="72" y="676" font-size="12" fill="#8B97A6">·  One accent (blue) for action; state colors are semantic, never decorative — a red row always means escalate.</text>
+<text x="72" y="700" font-size="12" fill="#8B97A6">·  Density with air: compact data, generous padding. Never a spinner on a blank page — skeletons and real empty states.</text>
+<text x="72" y="724" font-size="12" fill="#8B97A6">·  Monospace only for machine facts (ids, models, cost, idempotency keys). Motion ≤160ms, respect prefers-reduced-motion.</text>
+
+<text x="1192" y="792" font-size="11" fill="#3A434F" text-anchor="end">Drawbridge UI · design system</text>
+</svg>

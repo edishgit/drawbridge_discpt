@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 760" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#4F7CFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#3A434F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1240" height="760" fill="#0B0D10"/>
+<rect x="0.5" y="0.5" width="1239" height="759" fill="none" stroke="#1C2128"/>
+<text x="48" y="52" font-size="22" font-weight="700" fill="#E6EAF0">UI navigation flow</text>
+<text x="48" y="76" font-size="13" fill="#8B97A6">Two surfaces, one accent path · the blue route is the exact click-path the demo video follows</text>
+
+<!-- internal surface band -->
+<rect x="48" y="104" width="1144" height="360" rx="12" fill="#0E1116" stroke="#1C2128"/>
+<text x="68" y="130" font-size="11" font-weight="600" fill="#5B6673">INTERNAL · analyst &amp; CISO (authenticated)</text>
+
+<rect x="80" y="150" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="180" y="184" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Queue</text>
+<text x="180" y="204" font-size="11" fill="#5B6673" text-anchor="middle">all reviews · status strip</text>
+
+<rect x="380" y="150" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="480" y="184" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">New review</text>
+<text x="480" y="204" font-size="11" fill="#5B6673" text-anchor="middle">intake form</text>
+
+<rect x="380" y="290" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="480" y="324" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Review timeline</text>
+<text x="480" y="344" font-size="11" fill="#5B6673" text-anchor="middle">events · findings · score</text>
+
+<rect x="680" y="290" width="200" height="72" rx="10" fill="#161226" stroke="#3A2E63"/>
+<text x="780" y="324" font-size="13" font-weight="600" fill="#C8A8FF" text-anchor="middle">Gate G1</text>
+<text x="780" y="344" font-size="11" fill="#5B6673" text-anchor="middle">approve · conditional · reject</text>
+
+<rect x="980" y="290" width="180" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="1070" y="324" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Audit binder</text>
+<text x="1070" y="344" font-size="11" fill="#5B6673" text-anchor="middle">export PDF</text>
+
+<rect x="80" y="290" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="180" y="324" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Incident view</text>
+<text x="180" y="344" font-size="11" fill="#5B6673" text-anchor="middle">adversarial detail</text>
+
+<line x1="280" y1="186" x2="376" y2="186" stroke="#3A434F" stroke-width="1.25" marker-end="url(#g)"/>
+<line x1="480" y1="222" x2="480" y2="286" stroke="#4F7CFF" stroke-width="1.5" marker-end="url(#a)"/>
+<text x="496" y="260" font-size="10.5" fill="#4F7CFF">created</text>
+<path d="M180 222 L180 286" stroke="#3A434F" stroke-width="1.25" marker-end="url(#g)" fill="none"/>
+<text x="196" y="260" font-size="10.5" fill="#5B6673">open</text>
+<line x1="580" y1="326" x2="676" y2="326" stroke="#4F7CFF" stroke-width="1.5" marker-end="url(#a)"/>
+<text x="628" y="316" font-size="10.5" fill="#4F7CFF">scored</text>
+<line x1="880" y1="326" x2="976" y2="326" stroke="#4F7CFF" stroke-width="1.5" marker-end="url(#a)"/>
+<text x="928" y="316" font-size="10.5" fill="#4F7CFF">decided</text>
+<path d="M380 326 L284 326" stroke="#3A434F" stroke-width="1.25" marker-end="url(#g)" fill="none"/>
+<text x="332" y="316" font-size="10.5" fill="#5B6673">flag</text>
+
+<!-- external surface band -->
+<rect x="48" y="500" width="1144" height="180" rx="12" fill="#0E1116" stroke="#1C2128"/>
+<text x="68" y="526" font-size="11" font-weight="600" fill="#5B6673">EXTERNAL · vendor (token-scoped link, no login)</text>
+<rect x="80" y="546" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="180" y="580" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Questionnaire</text>
+<text x="180" y="600" font-size="11" fill="#5B6673" text-anchor="middle">answer · save</text>
+<rect x="380" y="546" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="480" y="580" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Evidence upload</text>
+<text x="480" y="600" font-size="11" fill="#5B6673" text-anchor="middle">screened on submit</text>
+<rect x="680" y="546" width="200" height="72" rx="10" fill="#12171E" stroke="#22262D"/>
+<text x="780" y="580" font-size="13" font-weight="600" fill="#E6EAF0" text-anchor="middle">Confirmation</text>
+<text x="780" y="600" font-size="11" fill="#5B6673" text-anchor="middle">“received”</text>
+<line x1="280" y1="582" x2="376" y2="582" stroke="#3A434F" stroke-width="1.25" marker-end="url(#g)"/>
+<line x1="580" y1="582" x2="676" y2="582" stroke="#3A434F" stroke-width="1.25" marker-end="url(#g)"/>
+
+<!-- cross-surface link -->
+<path d="M480 618 L480 660 L900 660 L900 366" stroke="#F0883E" stroke-width="1.25" stroke-dasharray="5 4" marker-end="url(#a)" fill="none" opacity="0.7"/>
+<text x="700" y="652" font-size="10.5" fill="#F0883E">upload event → review timeline (Pub/Sub)</text>
+
+<text x="1192" y="732" font-size="11" fill="#3A434F" text-anchor="end">Drawbridge UI · navigation flow</text>
+</svg>

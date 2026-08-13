@@ -1,0 +1,48 @@
+---
+title: "Drawbridge — Five tests, five architectural claims, five things a judge watches happen"
+---
+flowchart LR
+  subgraph T["THE TESTS — written before the features they cover"]
+    direction TB
+    T1["<b>test_idempotency.py</b><br/>SIGKILL at questionnaire_send, restart,<br/>assert the vendor inbox holds exactly one email"]
+    T2["<b>test_resume.py</b><br/>kill at evidence_review, restart,<br/>assert completed steps are a prefix and the review reaches GATED"]
+    T3["<b>test_armor_flow.py</b><br/>run NimbusWrite, assert adversarial_conduct,<br/>score at least 25 below baseline, band escalate"]
+    T4["<b>test_iam_boundaries.py</b><br/>the evidence agent attempts to send email<br/>and the gateway raises PolicyViolation"]
+    T5["<b>test_cross_exam.py</b><br/>run DataDynamo, assert an access_control finding<br/>with contradiction true"]
+  end
+
+  subgraph C["THE CLAIM EACH ONE DEFENDS"]
+    direction TB
+    C1["Side effects happen exactly once<br/>across retries, restarts and redeliveries"]
+    C2["Recoverability is structural,<br/>not special-case recovery code"]
+    C3["Adversarial content is a risk signal,<br/>not just a blocked request"]
+    C4["Least privilege is enforced,<br/>not merely documented"]
+    C5["The Evidence agent reconciles,<br/>it does not summarise"]
+  end
+
+  subgraph D["WHAT THE JUDGE SEES ON CAMERA"]
+    direction TB
+    D1["2:20 · the runtime killed live,<br/>then one email in the inbox"]
+    D2["2:20 · the review resumes at the exact step"]
+    D3["1:45 · the money shot — blocked,<br/>flagged, and the score rises"]
+    D4["3:10 · the IAM console filtered to the fleet,<br/>and a test failing as designed"]
+    D5["1:20 · MFA claimed everywhere,<br/>contradicted by their own SOC 2 exceptions"]
+  end
+
+  CI["<b>scenarios/demo_runner.py runs in CI on every push</b><br/>against fixtures, not live models, so it stays free — and so you never<br/>discover on day 28 that the demo path broke on day 24"]
+
+  T1 --> C1 --> D1
+  T2 --> C2 --> D2
+  T3 --> C3 --> D3
+  T4 --> C4 --> D4
+  T5 --> C5 --> D5
+  T -.-> CI
+
+  classDef t fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f
+  classDef c fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a
+  classDef d fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#14532d
+  classDef ci fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+  class T1,T2,T3,T4,T5 t
+  class C1,C2,C3,C4,C5 c
+  class D1,D2,D3,D4,D5 d
+  class CI ci

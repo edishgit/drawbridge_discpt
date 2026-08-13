@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 720" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<rect width="1240" height="720" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="1239" height="719" fill="none" stroke="#E2E8F0"/>
+<text x="48" y="46" font-size="22" font-weight="700" fill="#0F172A">Technology stack — every choice maps to a judged capability</text>
+<text x="48" y="70" font-size="13" fill="#64748B">Gemini-native product · Google Cloud infrastructure · Claude Code as developer tooling only</text>
+
+<g>
+<rect x="60" y="140" width="350" height="192" rx="10" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.25"/>
+<rect x="60" y="140" width="350" height="40" rx="10" fill="#0D9488"/><rect x="60" y="164" width="350" height="16" fill="#0D9488"/>
+<text x="76" y="166" font-size="13" font-weight="600" fill="#FFFFFF">Models and AI</text>
+<rect x="76" y="194" width="155" height="30" rx="15" fill="#F0FDFA" stroke="#99F6E4"/><text x="153.5" y="213" font-size="11.5" fill="#0F766E" text-anchor="middle">Gemini 3.5 Flash</text>
+<rect x="240" y="194" width="155" height="30" rx="15" fill="#F0FDFA" stroke="#99F6E4"/><text x="317.5" y="213" font-size="11.5" fill="#0F766E" text-anchor="middle">Gemini Pro (memos)</text>
+<rect x="76" y="232" width="155" height="30" rx="15" fill="#F0FDFA" stroke="#99F6E4"/><text x="153.5" y="251" font-size="11.5" fill="#0F766E" text-anchor="middle">Gemma · PII scrub</text>
+<rect x="240" y="232" width="155" height="30" rx="15" fill="#F0FDFA" stroke="#99F6E4"/><text x="317.5" y="251" font-size="11.5" fill="#0F766E" text-anchor="middle">ADK (Python)</text>
+<rect x="76" y="270" width="155" height="30" rx="15" fill="#F0FDFA" stroke="#99F6E4"/><text x="153.5" y="289" font-size="11.5" fill="#0F766E" text-anchor="middle">Agent Engine</text>
+<rect x="240" y="270" width="155" height="30" rx="15" fill="#F0FDFA" stroke="#99F6E4"/><text x="317.5" y="289" font-size="11.5" fill="#0F766E" text-anchor="middle">Memory Bank</text>
+</g>
+<g>
+<rect x="450" y="140" width="350" height="192" rx="10" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.25"/>
+<rect x="450" y="140" width="350" height="40" rx="10" fill="#DC2626"/><rect x="450" y="164" width="350" height="16" fill="#DC2626"/>
+<text x="466" y="166" font-size="13" font-weight="600" fill="#FFFFFF">Security and governance</text>
+<rect x="466" y="194" width="155" height="30" rx="15" fill="#FEF2F2" stroke="#FECACA"/><text x="543.5" y="213" font-size="11.5" fill="#991B1B" text-anchor="middle">Model Armor</text>
+<rect x="630" y="194" width="155" height="30" rx="15" fill="#FEF2F2" stroke="#FECACA"/><text x="707.5" y="213" font-size="11.5" fill="#991B1B" text-anchor="middle">Agent Gateway</text>
+<rect x="466" y="232" width="155" height="30" rx="15" fill="#FEF2F2" stroke="#FECACA"/><text x="543.5" y="251" font-size="11.5" fill="#991B1B" text-anchor="middle">Agent Registry</text>
+<rect x="630" y="232" width="155" height="30" rx="15" fill="#FEF2F2" stroke="#FECACA"/><text x="707.5" y="251" font-size="11.5" fill="#991B1B" text-anchor="middle">Per-agent IAM</text>
+<rect x="466" y="270" width="155" height="30" rx="15" fill="#FEF2F2" stroke="#FECACA"/><text x="543.5" y="289" font-size="11.5" fill="#991B1B" text-anchor="middle">Secret Manager</text>
+<rect x="630" y="270" width="155" height="30" rx="15" fill="#FEF2F2" stroke="#FECACA"/><text x="707.5" y="289" font-size="11.5" fill="#991B1B" text-anchor="middle">Policies P1 · P2</text>
+</g>
+<g>
+<rect x="840" y="140" width="350" height="192" rx="10" fill="#FFFFFF" stroke="#4F46E5" stroke-width="1.25"/>
+<rect x="840" y="140" width="350" height="40" rx="10" fill="#4F46E5"/><rect x="840" y="164" width="350" height="16" fill="#4F46E5"/>
+<text x="856" y="166" font-size="13" font-weight="600" fill="#FFFFFF">Data and events</text>
+<rect x="856" y="194" width="155" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/><text x="933.5" y="213" font-size="11.5" fill="#3730A3" text-anchor="middle">Firestore</text>
+<rect x="1020" y="194" width="155" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/><text x="1097.5" y="213" font-size="11.5" fill="#3730A3" text-anchor="middle">Cloud Pub/Sub</text>
+<rect x="856" y="232" width="155" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/><text x="933.5" y="251" font-size="11.5" fill="#3730A3" text-anchor="middle">Cloud Storage</text>
+<rect x="1020" y="232" width="155" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/><text x="1097.5" y="251" font-size="11.5" fill="#3730A3" text-anchor="middle">Idempotency keys</text>
+<rect x="856" y="270" width="155" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/><text x="933.5" y="289" font-size="11.5" fill="#3730A3" text-anchor="middle">Event ledger</text>
+<rect x="1020" y="270" width="155" height="30" rx="15" fill="#EEF2FF" stroke="#C7D2FE"/><text x="1097.5" y="289" font-size="11.5" fill="#3730A3" text-anchor="middle">Checkpoints</text>
+</g>
+<g>
+<rect x="60" y="380" width="350" height="192" rx="10" fill="#FFFFFF" stroke="#475569" stroke-width="1.25"/>
+<rect x="60" y="380" width="350" height="40" rx="10" fill="#475569"/><rect x="60" y="404" width="350" height="16" fill="#475569"/>
+<text x="76" y="406" font-size="13" font-weight="600" fill="#FFFFFF">Compute and delivery</text>
+<rect x="76" y="434" width="155" height="30" rx="15" fill="#F8FAFC" stroke="#CBD5E1"/><text x="153.5" y="453" font-size="11.5" fill="#334155" text-anchor="middle">Cloud Run</text>
+<rect x="240" y="434" width="155" height="30" rx="15" fill="#F8FAFC" stroke="#CBD5E1"/><text x="317.5" y="453" font-size="11.5" fill="#334155" text-anchor="middle">Cloud Build</text>
+<rect x="76" y="472" width="155" height="30" rx="15" fill="#F8FAFC" stroke="#CBD5E1"/><text x="153.5" y="491" font-size="11.5" fill="#334155" text-anchor="middle">Artifact Registry</text>
+<rect x="240" y="472" width="155" height="30" rx="15" fill="#F8FAFC" stroke="#CBD5E1"/><text x="317.5" y="491" font-size="11.5" fill="#334155" text-anchor="middle">Scale-to-zero</text>
+<rect x="76" y="510" width="155" height="30" rx="15" fill="#F8FAFC" stroke="#CBD5E1"/><text x="153.5" y="529" font-size="11.5" fill="#334155" text-anchor="middle">Max-instance caps</text>
+<rect x="240" y="510" width="155" height="30" rx="15" fill="#F8FAFC" stroke="#CBD5E1"/><text x="317.5" y="529" font-size="11.5" fill="#334155" text-anchor="middle">Budget alerts</text>
+</g>
+<g>
+<rect x="450" y="380" width="350" height="192" rx="10" fill="#FFFFFF" stroke="#9333EA" stroke-width="1.25"/>
+<rect x="450" y="380" width="350" height="40" rx="10" fill="#9333EA"/><rect x="450" y="404" width="350" height="16" fill="#9333EA"/>
+<text x="466" y="406" font-size="13" font-weight="600" fill="#FFFFFF">Observability</text>
+<rect x="466" y="434" width="155" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/><text x="543.5" y="453" font-size="11.5" fill="#6B21A8" text-anchor="middle">OpenTelemetry</text>
+<rect x="630" y="434" width="155" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/><text x="707.5" y="453" font-size="11.5" fill="#6B21A8" text-anchor="middle">Cloud Trace</text>
+<rect x="466" y="472" width="155" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/><text x="543.5" y="491" font-size="11.5" fill="#6B21A8" text-anchor="middle">Cloud Logging</text>
+<rect x="630" y="472" width="155" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/><text x="707.5" y="491" font-size="11.5" fill="#6B21A8" text-anchor="middle">Audit Binder</text>
+<rect x="466" y="510" width="155" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/><text x="543.5" y="529" font-size="11.5" fill="#6B21A8" text-anchor="middle">Reasoning spans</text>
+<rect x="630" y="510" width="155" height="30" rx="15" fill="#FAF5FF" stroke="#E9D5FF"/><text x="707.5" y="529" font-size="11.5" fill="#6B21A8" text-anchor="middle">Cost per review</text>
+</g>
+<g>
+<rect x="840" y="380" width="350" height="192" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="1.25"/>
+<rect x="840" y="380" width="350" height="40" rx="10" fill="#D97706"/><rect x="840" y="404" width="350" height="16" fill="#D97706"/>
+<text x="856" y="406" font-size="13" font-weight="600" fill="#FFFFFF">Experience and dev</text>
+<rect x="856" y="434" width="155" height="30" rx="15" fill="#FFFBEB" stroke="#FDE68A"/><text x="933.5" y="453" font-size="11.5" fill="#92400E" text-anchor="middle">Next.js dashboard</text>
+<rect x="1020" y="434" width="155" height="30" rx="15" fill="#FFFBEB" stroke="#FDE68A"/><text x="1097.5" y="453" font-size="11.5" fill="#92400E" text-anchor="middle">Vendor portal</text>
+<rect x="856" y="472" width="155" height="30" rx="15" fill="#FFFBEB" stroke="#FDE68A"/><text x="933.5" y="491" font-size="11.5" fill="#92400E" text-anchor="middle">Tailwind CSS</text>
+<rect x="1020" y="472" width="155" height="30" rx="15" fill="#FFFBEB" stroke="#FDE68A"/><text x="1097.5" y="491" font-size="11.5" fill="#92400E" text-anchor="middle">Scenario runner</text>
+<rect x="856" y="510" width="155" height="30" rx="15" fill="#FFFBEB" stroke="#FDE68A"/><text x="933.5" y="529" font-size="11.5" fill="#92400E" text-anchor="middle">Claude Code (dev)</text>
+<rect x="1020" y="510" width="155" height="30" rx="15" fill="#FFFBEB" stroke="#FDE68A"/><text x="1097.5" y="529" font-size="11.5" fill="#92400E" text-anchor="middle">GitHub (public)</text>
+</g>
+
+<rect x="60" y="612" width="1130" height="44" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="625" y="639" font-size="12" fill="#475569" text-anchor="middle">Flash-first routing mirrors the organizers' cost guidance · Armor + per-agent IAM are the security story · Trace is the binder — under $0.50 per review.</text>
+
+<text x="1192" y="696" font-size="11" fill="#94A3B8" text-anchor="end">Drawbridge · technology stack summary</text>
+</svg>

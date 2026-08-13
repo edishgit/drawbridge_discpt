@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 820" font-family="Inter,'Segoe UI',system-ui,Arial,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#94A3B8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="1240" height="820" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="1239" height="819" fill="none" stroke="#E2E8F0"/>
+<text x="48" y="46" font-size="22" font-weight="700" fill="#0F172A">Deployment architecture — solo builder, production posture</text>
+<text x="48" y="70" font-size="13" fill="#64748B">Deployed on day 2, not day 19 · every service scale-to-zero · console proof recorded before teardown</text>
+
+<rect x="60" y="110" width="340" height="560" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-dasharray="6 4"/>
+<text x="80" y="138" font-size="12.5" font-weight="600" fill="#475569">Developer loop</text>
+<rect x="80" y="160" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="230" y="190" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">ADK local runtime</text>
+<text x="230" y="212" font-size="11.5" fill="#64748B" text-anchor="middle">adk web · fast agent iteration</text>
+<rect x="80" y="260" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="230" y="290" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Claude Code</text>
+<text x="230" y="312" font-size="11.5" fill="#64748B" text-anchor="middle">scaffolding · tests · synthetic data</text>
+<rect x="80" y="360" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="230" y="390" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Git — public repo</text>
+<text x="230" y="412" font-size="11.5" fill="#64748B" text-anchor="middle">judges reproduce from README</text>
+<rect x="80" y="460" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.25"/>
+<text x="230" y="490" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Makefile targets</text>
+<text x="230" y="512" font-size="11.5" fill="#64748B" text-anchor="middle">bootstrap · seed · demo · teardown</text>
+
+<line x1="400" y1="300" x2="446" y2="300" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="423" y="290" font-size="11" fill="#64748B" text-anchor="middle">push</text>
+
+<rect x="450" y="110" width="340" height="560" rx="12" fill="#EEF2FF" stroke="#C7D2FE"/>
+<text x="470" y="138" font-size="12.5" font-weight="600" fill="#4338CA">Build and release</text>
+<rect x="470" y="160" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="620" y="190" font-size="13" font-weight="600" fill="#3730A3" text-anchor="middle">Cloud Build</text>
+<text x="620" y="212" font-size="11.5" fill="#64748B" text-anchor="middle">container build on push</text>
+<rect x="470" y="260" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="620" y="290" font-size="13" font-weight="600" fill="#3730A3" text-anchor="middle">Artifact Registry</text>
+<text x="620" y="312" font-size="11.5" fill="#64748B" text-anchor="middle">versioned images</text>
+<rect x="470" y="360" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="620" y="390" font-size="13" font-weight="600" fill="#3730A3" text-anchor="middle">Deploy</text>
+<text x="620" y="412" font-size="11.5" fill="#64748B" text-anchor="middle">Agent Engine + Cloud Run</text>
+<rect x="470" y="460" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.25"/>
+<text x="620" y="490" font-size="13" font-weight="600" fill="#92400E" text-anchor="middle">Cost guardrails</text>
+<text x="620" y="512" font-size="11.5" fill="#64748B" text-anchor="middle">alerts 50/100/130 · scale-to-zero</text>
+
+<line x1="790" y1="300" x2="836" y2="300" stroke="#94A3B8" stroke-width="1.25" marker-end="url(#a)"/>
+<text x="813" y="290" font-size="11" fill="#64748B" text-anchor="middle">release</text>
+
+<rect x="840" y="110" width="340" height="560" rx="12" fill="#F0FDFA" stroke="#99F6E4"/>
+<text x="860" y="138" font-size="12.5" font-weight="600" fill="#0F766E">Runtime — Google Cloud</text>
+<rect x="860" y="160" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.25"/>
+<text x="1010" y="190" font-size="13" font-weight="600" fill="#0F766E" text-anchor="middle">Vertex AI Agent Engine</text>
+<text x="1010" y="212" font-size="11.5" fill="#64748B" text-anchor="middle">the fleet · long-running sessions</text>
+<rect x="860" y="260" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#6366F1" stroke-width="1.25"/>
+<text x="1010" y="290" font-size="13" font-weight="600" fill="#3730A3" text-anchor="middle">Cloud Run services</text>
+<text x="1010" y="312" font-size="11.5" fill="#64748B" text-anchor="middle">portal · dashboard · binder · inbox sim</text>
+<rect x="860" y="360" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.25"/>
+<text x="1010" y="390" font-size="13" font-weight="600" fill="#6B21A8" text-anchor="middle">Data plane</text>
+<text x="1010" y="412" font-size="11.5" fill="#64748B" text-anchor="middle">Pub/Sub · Firestore · Storage · Secrets</text>
+<rect x="860" y="460" width="300" height="76" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.25"/>
+<text x="1010" y="490" font-size="13" font-weight="600" fill="#6B21A8" text-anchor="middle">Observability</text>
+<text x="1010" y="512" font-size="11.5" fill="#64748B" text-anchor="middle">Cloud Trace · Logging · OTel spans</text>
+
+<rect x="60" y="706" width="1120" height="42" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="620" y="732" font-size="12" fill="#475569" text-anchor="middle">Record the console proof on camera first — then tear down everything except the demo-window services.</text>
+
+<text x="1192" y="796" font-size="11" fill="#94A3B8" text-anchor="end">Drawbridge · deployment and cost posture</text>
+</svg>
