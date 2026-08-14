@@ -35,74 +35,114 @@ Drawbridge is organized as seven horizontal layers, and the architecture's core 
 
 The tree below is the complete intended structure of the public repo. Judges grade the README's spin-up path, so the layout optimizes for a stranger finding everything where they expect it: agents are one folder each, all demo data ships in-repo, and one Makefile drives bootstrap → seed → demo → teardown.
 
+
 ```
 drawbridge/
-├── README.md                     # problem, demo video, spin-up in 30 minutes, teardown
+├── README.md                        # problem, demo video, 30-minute spin-up, teardown, permission matrix
 ├── LICENSE
-├── .env.example                  # project id, region, model names — no secrets ever
-├── Makefile                      # bootstrap · seed · run-local · deploy · demo · teardown
-├── agents/
+├── .env.example                     # project id, region, model names, template ids — no secrets ever
+├── Makefile                         # bootstrap · seed · run-local · deploy · demo · teardown · test
+├── pyproject.toml                   # pinned ADK 2, google-cloud-*, pydantic, pytest
+│
+├── shared/                          # the kernel — built first, imported by agents/ AND services/
+│   ├── config.py                    # Pydantic validation at import; fails loudly on startup
+│   ├── domain.py                    # Review, Finding, Vendor, EvidenceChunk, ReviewState + ALLOWED table
+│   ├── events.py                    # EventEnvelope; publisher/subscriber plumbing for all 11 topics
+│   ├── gateway.py                   # THE chokepoint — P1 token · P2 verdict-bearing stamp · P3 allowlist
+│   ├── armor.py                     # Model Armor client, stamp signing/verification, verdict types
+│   ├── idempotency.py               # once() — transactional claim BEFORE the effect; plan-versioned keys
+│   ├── checkpoint.py                # step() — replay skips completed steps; resume is structural
+│   ├── telemetry.py                 # OTel span schema: goal · decision · model · tokens · cost · latency
+│   ├── memory.py                    # Memory Bank; enumerated note types only, provenance-tagged
+│   └── routing.py                   # Flash / Pro / text-embedding / Gemma table + per-review cost meter
+│
+├── agents/                          # each agent.py exports: agent · TOOLS · handle_event · SERVICE_ACCOUNT
 │   ├── orchestrator/
-│   │   ├── agent.py              # ADK root agent: plan, dispatch, enforce gates
-│   │   ├── planner.py            # vendor tiering → review plan
-│   │   ├── state.py              # checkpoints + idempotency key writes
-│   │   └── prompts/              # planning and gating prompt templates
+│   │   ├── agent.py                 # ADK 2 graph workflow root: plan, dispatch, enforce gates
+│   │   ├── planner.py               # vendor facts + dossier → tiered review plan (Flash)
+│   │   ├── retier.py                # evidence overrules intake; tier moves up only, plan version ++
+│   │   └── prompts/                 # tiering policy and data-scope classification templates
 │   ├── questionnaire/
 │   │   ├── agent.py
-│   │   ├── generator.py          # tier → question set (see Appendix C of master doc)
-│   │   ├── parser.py             # incremental reply parsing over days
-│   │   └── chaser.py             # polite scheduled follow-ups
+│   │   ├── bank.yaml                # curated question bank by rubric domain — model selects, never invents
+│   │   ├── generator.py             # tier → question set (60 / 30 / 12), AI domain when is_ai_vendor
+│   │   ├── parser.py                # incremental reply merge by question_id, confidence + provenance
+│   │   ├── chaser.py                # 3 rounds max: reminder → deadline → escalation, own idem keys
+│   │   └── followup.py              # one targeted re-ask when an answer arrives but is unusable (Target)
 │   ├── evidence/
 │   │   ├── agent.py
-│   │   ├── extractors.py         # SOC 2 / cert / policy control extraction
-│   │   ├── retrieval.py          # chunk · embed · Firestore KNN search (L2.5)
-│   │   ├── checks.py             # deterministic checks — expiry, staleness, scope
-│   │   ├── subprocessors.py      # fourth-party chain extraction (Target)
-│   │   └── cross_exam.py         # claims-vs-retrieved-passages contradiction detection
+│   │   ├── extractors.py            # pass 1 (Flash) — control claims, scope, exceptions, dates, auditor
+│   │   ├── retrieval.py             # pass 2 — chunk · embed · Firestore KNN top-k per claim (L2.5)
+│   │   ├── cross_exam.py            # pass 3 (Pro) — claims vs retrieved passages → findings + severity
+│   │   ├── checks.py                # deterministic: cert expiry, report staleness, scope — source="rule"
+│   │   └── subprocessors.py         # fourth-party chain extraction and unknown-party diff (Target)
 │   ├── risk_scorer/
 │   │   ├── agent.py
-│   │   ├── rubric.yaml           # weighted domains summing to 100, bands, −25 modifier
-│   │   └── memo.py               # Gemini Pro risk-memo synthesis (the only model call)
+│   │   ├── rubric.yaml              # weighted domains summing to 100, bands, −25 adversarial modifier
+│   │   ├── scoring.py               # deterministic arithmetic — NO model call lives in this file
+│   │   └── memo.py                  # the single Gemini Pro call: CISO memo, screened before display
 │   ├── watchdog/
-│   │   ├── agent.py
-│   │   └── sources.py            # allowlisted breach feeds + cert-expiry checks
-│   └── shared/
-│       ├── gateway.py            # all tool calls route here; policies P1/P2/P3 enforced
-│       ├── armor.py              # Model Armor screening + verdict-bearing clean-stamp
-│       ├── memory.py             # Memory Bank dossier read/write; structured notes only
-│       ├── telemetry.py          # OTel span schema: goal, decision, model, cost
-│       └── models.py             # Flash/Pro/embedding/Gemma routing table
-├── services/
-│   ├── portal/                   # vendor-facing upload + questionnaire UI (Cloud Run)
-│   ├── dashboard/                # internal timeline, gates, time-compression control
-│   │   └── app/(public)/         # statically rendered · cached reads · NO model import
-│   ├── approvals/                # renders gate cards; sole holder of the private key
-│   ├── binder/                   # trace query → Audit Binder PDF export (templated)
-│   └── vendor_inbox/             # simulated vendor mailbox (honest demo substitute)
+│   │   ├── agent.py                 # scheduled sweep over the approved-vendor portfolio
+│   │   ├── sources.py               # allowlisted breach/news feeds + cert-expiry math (P3-bounded)
+│   │   └── relevance.py             # domain + legal-entity match, confidence threshold, triage queue
+│   └── contract_clause/             # stretch only — first on the cut list, may never exist
+│
+├── services/                        # everything deployable that is not an agent
+│   ├── screening/                   # runs as sa-armor — the ingress pipeline; NOT an agent
+│   │   ├── main.py                  # vendor.evidence_uploaded → extract → screen → scrub → index → stamp
+│   │   ├── extract.py               # local text extraction; raw bytes never reach a generative model
+│   │   └── indexer.py               # chunk + embed stamped content into Firestore KNN
+│   ├── portal/                      # UNTRUSTED ZONE — token-scoped vendor questionnaire + upload
+│   ├── dashboard/                   # internal: queue · timeline · gate card · binder view
+│   │   ├── app/(public)/            # statically rendered · cached Firestore reads · NO model import
+│   │   └── app/(internal)/          # token-gated routes
+│   ├── approvals/                   # renders gate cards; SOLE holder of the private signing key
+│   ├── binder/                      # trace + ledger → HTML template → PDF; no model participates
+│   ├── vendor_inbox/                # simulated mail channel, SMTP-adapter compatible (disclosed)
+│   └── pii_scrubber/                # Gemma in-VPC, called AFTER Model Armor screening (stretch)
+│
 ├── infra/
-│   ├── pubsub.yaml               # 11 topics + subscriptions + DLQs
-│   ├── iam/                      # one service account per agent, plus sa-armor
-│   ├── model_armor/              # drawbridge-untrusted + drawbridge-output templates
-│   ├── deploy/                   # Agent Engine + Cloud Run configs
-│   └── budgets.yaml              # alerts at $50 / $100 / $130
-├── synthetic-vendors/
-│   ├── cleancloud/               # the clean control vendor
-│   ├── datadynamo/               # the contradictor (MFA claim vs SOC 2 exceptions)
-│   ├── nimbuswrite/              # the adversary — labeled injection payload inside
-│   └── injection-corpus/         # 12 labeled variants; CI publishes the detection rate
+│   ├── bootstrap.sh                 # APIs · topics + DLQs · buckets + lifecycle · Firestore · IAM
+│   ├── teardown.sh                  # everything except the demo dashboard
+│   ├── pubsub.yaml                  # 11 topics, subscriptions, 60s ack, DLQ after 5 attempts
+│   ├── budgets.yaml                 # alerts at $50 / $100 / $130 of the $150 credit
+│   ├── iam/                         # 5 agent SAs + sa-armor + 3 service SAs, collection-level grants
+│   ├── firestore/                   # composite indexes, incl. KNN vector index with review_id pre-filter
+│   ├── model_armor/                 # drawbridge-untrusted + drawbridge-output templates as code
+│   └── deploy/                      # Agent Engine and Cloud Run configs, min-instances 0, max 2
+│
+├── synthetic-vendors/               # shipped in-repo so judges reproduce every beat
+│   ├── cleancloud/                  # Tier 2 control — clean run, ≥80, calibrates the rubric
+│   ├── datadynamo/                  # Tier 1 contradictor — MFA claim vs SOC 2 exception, expired ISO
+│   ├── nimbuswrite/                 # Tier 1 adversary — the labeled injection payload
+│   └── injection-corpus/            # 12 labeled variants; CI publishes the detection rate
+│
 ├── scenarios/
-│   └── demo_runner.py            # replays the entire demo end-to-end, deterministically
+│   ├── seed.py                      # load 10–12 reviews into Firestore + Storage
+│   ├── clock.py                     # DemoClock — 1s = 4min, badge shown whenever factor ≠ 1
+│   └── demo_runner.py               # replays the entire demo deterministically
+│
 ├── docs/
-│   ├── architecture.md           # this document
-│   ├── diagrams/                 # the SVGs, incl. the graph_dump.py-generated one
-│   └── site/                     # docs website source (see §11)
-└── tests/
-    ├── test_idempotency.py       # kill mid-step → exactly one email
-    ├── test_resume.py            # checkpoint → restart → same end state
-    ├── test_armor_flow.py        # payload blocked → flag raised → trust score drops
-    ├── test_retier.py            # evidence overrules intake; plan version increments
-    ├── test_late_events.py       # out-of-phase events attach, never mutate
-    └── test_token_forgery.py     # the gateway cannot mint what it can verify
+│   ├── architecture.md              # trust zones, decision log, memory hierarchy
+│   ├── BUILD-ORDER.md               # day-by-day plan, one directory per day
+│   ├── BACKLOG.md                   # new ideas go here; read at the M2 gate, not before
+│   ├── diagrams/                    # 24 mermaid sources + the graph_dump.py-generated structural one
+│   ├── design/                      # FRONTEND.md + 10 annotated wireframes
+│   └── site/                        # docs website source
+│
+├── .github/workflows/
+│   └── ci.yml                       # demo_runner smoke run + injection corpus, against fixtures
+│
+└── tests/                           # the eight that carry the architectural claim
+    ├── test_idempotency.py          # kill mid-step → exactly one email in the inbox
+    ├── test_resume.py               # checkpoint → restart → completed steps are a prefix
+    ├── test_armor_flow.py           # payload blocked → flag raised → trust score −25 → escalate
+    ├── test_cross_exam.py           # DataDynamo contradiction, citing the retrieved passage
+    ├── test_iam_boundaries.py       # evidence agent cannot email — PolicyViolation, fails as designed
+    ├── test_retier.py               # evidence overrules intake; plan version increments
+    ├── test_late_events.py          # out-of-phase events attach to the ledger, never mutate
+    └── test_token_forgery.py        # replayed and self-minted tokens both rejected at the gateway
+
 ```
 
 ---
