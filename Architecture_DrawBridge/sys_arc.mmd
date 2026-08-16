@@ -1,126 +1,197 @@
 flowchart TD
+    %% ==========================================
+    %% PROFESSIONAL ENTERPRISE COLOR PALETTE
+    %% ==========================================
+    classDef untrusted fill:#FCE8E6,stroke:#C5221F,stroke-width:2px,color:#202124
+    classDef screening fill:#FEF7E0,stroke:#F29900,stroke-width:2px,color:#202124
+    classDef memory fill:#E6F4EA,stroke:#1E8E3E,stroke-width:2px,color:#202124
+    classDef model fill:#F3E8FD,stroke:#9334E6,stroke-width:2px,color:#202124
+    classDef runtime fill:#E8F0FE,stroke:#1A73E8,stroke-width:2px,color:#202124
+    classDef gates fill:#FCE8E6,stroke:#D93025,stroke-width:2px,color:#202124
+    classDef gov fill:#F8F9FA,stroke:#BCC1C6,stroke-width:2px,color:#202124
+    classDef backbone fill:#FFFFFF,stroke:#80868B,stroke-width:2px,color:#202124,stroke-dasharray: 5 5
 
-    %% Define Node Styles
-    classDef untrusted fill:#fce8e6,stroke:#c5221f,stroke-width:1px;
-    classDef screening fill:#fef7e0,stroke:#f29900,stroke-width:1px;
-    classDef backbone fill:#e8f0fe,stroke:#1a73e8,stroke-width:1px;
-    classDef runtime fill:#e8f0fe,stroke:#1a73e8,stroke-width:1px;
-    classDef model fill:#f3e8fd,stroke:#9334e6,stroke-width:1px;
-    classDef memory fill:#e6f4ea,stroke:#1e8e3e,stroke-width:1px;
-    classDef gates fill:#fce8e6,stroke:#d93025,stroke-width:1px;
-    classDef gov fill:#f8f9fa,stroke:#dadce0,stroke-width:1px;
-    classDef invis fill:none,stroke:none;
-
+    %% ==========================================
     %% ① UNTRUSTED ZONE
-    subgraph UNTRUSTED ["① UNTRUSTED ZONE - every byte here was authored by the party being judged"]
+    %% ==========================================
+    subgraph Z1 [① UNTRUSTED ZONE - every byte here was authored by the party being judged]
         direction TB
-        VendorContact["<b>Vendor contact</b><br/>NimbusWrite AI - Tier 1 - AI SaaS"]:::untrusted
-        VendorInbox["<b>Vendor Inbox</b> - Cloud Run<br/>simulated mail channel<br/>SMTP-adapter compatible"]:::untrusted
+        VC["`**Vendor contact**
+        NimbusWrite AI · Tier 1 · AI SaaS`"]:::untrusted
+        VI["`**Vendor Inbox** (Cloud Run)
+        simulated mail channel
+        SMTP-adapter compatible`"]:::untrusted
         
-        VendorContact --> VendorInbox
+        VC --> VI
     end
 
+    %% ==========================================
     %% ② INGRESS SCREENING
-    subgraph INGRESS ["② INGRESS SCREENING - a platform-owned pipeline; no agent has a code path into quarantine"]
+    %% ==========================================
+    subgraph Z2 [② INGRESS SCREENING - a platform-owned pipeline; no agent has a code path into quarantine]
         direction TB
-        Quarantine[("<b>evidence-quarantine</b><br/>Cloud Storage - raw bytes<br/>7-day lifecycle rule")]:::screening
-        Extraction["<b>Local extraction</b><br/>text pulled without<br/>model contact"]:::screening
-        Armor{"<b>Model Armor</b><br/>five filters - two templates<br/>fail-closed on a skipped detector"}:::screening
-        Inert[("<b>Inert excerpt</b><br/>blocked payload kept as<br/>evidence - never re-prompted")]:::screening
-        Clean[("<b>evidence-clean</b><br/>signed verdict bearing stamp<br/>template - version - per-filter verdicts")]:::screening
+        QDB[("`**evidence-quarantine**
+        Cloud Storage (raw bytes)
+        7-day lifecycle rule`")]:::screening
+        Ext["`**Local extraction**
+        text pulled without
+        model contact`"]:::screening
+        Arm{"`**Model Armor**
+        five filters · two templates
+        fail-closed on a skipped detector`"}:::screening
+        Inert[("`**Inert excerpt**
+        blocked payload kept as
+        evidence · never re-prompted`")]:::screening
+        Clean[("`**evidence-clean**
+        signed verdict bearing stamp
+        template · version · per-filter verdicts`")]:::screening
 
-        Quarantine --> Extraction
-        Extraction -- "screen FIRST, on real text" --> Armor
-        Armor -- "threat found - blocked" --> Inert
-        Armor -- "clean or sanitized" --> Clean
+        QDB --> Ext
+        Ext -- "screen FIRST, on real text" --> Arm
+        Arm -- "threat found - blocked" --> Inert
+        Arm -- "clean or sanitized" --> Clean
     end
 
-    VendorInbox -- "evidence uploads and reply<br/>bodies alike" --> Quarantine
+    VI -- "evidence uploads and reply bodies alike" --> QDB
 
+    %% ==========================================
     %% ③ EVENT BACKBONE
-    subgraph BACKBONE ["③ EVENT BACKBONE - Pub/Sub at-least-once, unordered - DLQ after 5 attempts -> NEEDS_HUMAN"]
-        direction TB
-        Events["review.intake - review.plan_ready - review.chase_due -<br/>vendor.reply_received -<br/>vendor.evidence_uploaded - evidence.screened -<br/>review.findings_ready - review.score_ready -<br/>review.approved - review.rescore - watchdog.sweep - watchdog.hit"]:::backbone
+    %% ==========================================
+    subgraph Z3 [③ EVENT BACKBONE - Pub/Sub at-least-once, unordered]
+        Evt["`**Message Bus**
+        DLQ after 5 attempts ➔ NEEDS_HUMAN
+        ---
+        review.intake · review.plan_ready · review.chase_due
+        vendor.reply_received · vendor.evidence_uploaded · evidence.screened
+        review.findings_ready · review.score_ready · review.approved
+        review.rescore · watchdog.sweep · watchdog.hit`"]:::backbone
     end
 
-    Inert -- "ADVERSARIAL CONDUCT -<br/>-25 trust points - forced<br/>escalation" --> Events
-    Clean -- "evidence.screened" --> Events
+    Inert -- "ADVERSARIAL CONDUCT\n-25 trust points (forced escalation)" --> Evt
+    Clean -- "evidence.screened" --> Evt
 
+    %% ==========================================
     %% ④ AGENT RUNTIME
-    subgraph RUNTIME ["④ AGENT RUNTIME - ADK 2 agents on Vertex AI Agent Engine - orchestrated by Pub/Sub, not by a graph runner - one identity each"]
+    %% ==========================================
+    subgraph Z4 [④ AGENT RUNTIME - ADK 2 agents on Vertex AI Agent Engine - orchestrated by Pub/Sub, not by a graph runner - one identity each]
         direction LR
-        Quest["<b>Questionnaire</b><br/>sa-questionnaire<br/>generate - send - parse - chase"]:::runtime
-        Risk["<b>Risk Scorer</b><br/>sa-scorer<br/>rubric arithmetic - memo"]:::runtime
-        Watch["<b>Watchdog</b><br/>sa-watchdog<br/>scheduled post-approval sweeps"]:::runtime
-        Evid["<b>Evidence</b><br/>sa-evidence<br/>extract - retrieve - cross-examine"]:::runtime
-        Orch["<b>Orchestrator</b><br/>sa-orchestrator<br/>tier - plan - re-tier - dispatch - gate"]:::runtime
+        Quest["`**Questionnaire**
+        sa-questionnaire
+        generate · send · parse · chase`"]:::runtime
+        Risk["`**Risk Scorer**
+        sa-scorer
+        rubric arithmetic · memo`"]:::runtime
+        Watch["`**Watchdog**
+        sa-watchdog
+        scheduled post-approval sweeps`"]:::runtime
+        Evid["`**Evidence**
+        sa-evidence
+        extract · retrieve · cross-examine`"]:::runtime
+        Orch["`**Orchestrator**
+        sa-orchestrator
+        tier · plan · re-tier · dispatch · gate`"]:::runtime
     end
 
-    Events --> Quest
-    Events --> Risk
-    Events --> Watch
-    Events --> Evid
-    Events --> Orch
+    Evt --> Quest & Risk & Watch & Evid & Orch
 
+    %% ==========================================
     %% ⑤ TOOL & MODEL PLANE
-    subgraph TOOL_MODEL ["⑤ TOOL & MODEL PLANE - P1 and P2 at the gateway, P3 in the router — the only place every model call passes"]
+    %% ==========================================
+    subgraph Z5 [⑤ TOOL & MODEL PLANE - P1 and P2 at the gateway, P3 in the router — the only place every model call passes]
         direction TB
-        P1["<b>P1</b> - no outbound email to a new contact<br/>without a signed human approval token<br/>verified with a public key it cannot sign with"]:::model
-        P2["<b>P2</b> - no external content reaches a model<br/>without a verified verdict-bearing clean stamp"]:::model
-        P3["<b>P3</b> - no outbound fetch outside<br/>the fixed allowlist"]:::model
-        GeminiEmb["<b>gemini-embedding-001</b> - 3072 dim<br/>evidence chunks - called by the Evidence agent,<br/>never by the screening identity"]:::model
-        
-        GeminiFlash["<b>Gemini 1.5 Flash</b> - default<br/>parse - extract - classify"]:::model
-        GeminiPro["<b>Gemini 1.5 Pro</b> - exactly two places<br/>cross-examination - risk memo"]:::model
-        OutputScreening["<b>Output screening</b><br/>drawbridge-output-template<br/>memo and outbound mail checked<br/>before a human acts on them"]:::model
+        P1["`**P1**
+        no outbound email to a new contact
+        without a signed human approval token
+        verified with a public key it cannot sign with`"]:::model
+        P2["`**P2**
+        no external content reaches a model
+        without a verified verdict-bearing clean stamp`"]:::model
+        P3["`**P3**
+        no outbound fetch outside
+        the fixed allowlist`"]:::model
+        GemFlash["`**Gemini 1.5 Flash** (default)
+        parse · extract · classify`"]:::model
+        GemPro["`**Gemini 1.5 Pro** (exactly two places)
+        cross-examination · risk memo`"]:::model
+        OutScreen["`**Output screening**
+        drawbridge-output-template
+        memo and outbound mail checked
+        before a human acts on them`"]:::model
+        GemEmb["`**gemini-embedding-001** (3072 dim)
+        evidence chunks - called by the Evidence agent,
+        never by the screening identity`"]:::model
 
-        P2 --> GeminiFlash
-        P2 --> GeminiPro
-        GeminiPro --> OutputScreening
+        P2 --> GemFlash & GemPro
+        GemPro --> OutScreen
     end
 
-    Evid --> GeminiEmb
+    Evid --> GemEmb
 
+    %% ==========================================
     %% ⑥ STATE & MEMORY
-    subgraph MEMORY ["⑥ STATE & MEMORY - four layers, four jobs"]
+    %% ==========================================
+    subgraph Z6 [⑥ STATE & MEMORY - four layers, four jobs]
         direction TB
-        L25[("<b>L2.5 - Semantic retrieval</b><br/>Pinecone kNN over screened evidence<br/>which passage says this?")]:::memory
-        L1["<b>L1 - Session state</b><br/>Agent Engine<br/>in-flight reasoning"]:::memory
-        L2[("<b>L2 - Firestore ledger</b><br/>reviews - findings - events<br/>checkpoints - idempotency keys")]:::memory
-        L3[("<b>L3 - Memory Bank</b><br/>vendor dossiers - policy memory<br/>structured notes only - provenance-tagged")]:::memory
+        L25[("`**L2.5 - Semantic retrieval**
+        Pinecone kNN over screened evidence
+        *which passage says this?*`")]:::memory
+        L1[("`**L1 - Session state**
+        Agent Engine
+        in-flight reasoning`")]:::memory
+        L2[("`**L2 - Firestore ledger**
+        reviews · findings · events
+        checkpoints · idempotency keys`")]:::memory
+        L3[("`**L3 - Memory Bank**
+        vendor dossiers · policy memory
+        structured notes only - provenance-tagged`")]:::memory
     end
 
-    GeminiEmb -- "chunk - embed - index -<br/>only stamped content" --> L25
-    L25 -- "top-k passages per claim" --> GeminiPro
+    GemEmb -- "chunk · embed · index\nonly stamped content" --> L25
+    L25 -- "top-k passages per claim" --> GemPro
 
+    %% ==========================================
     %% ⑦ HUMAN GATES
-    subgraph HUMAN ["⑦ HUMAN GATES - signed, single-use, scoped tokens — enforced at the gateway, never in the UI"]
+    %% ==========================================
+    subgraph Z7 [⑦ HUMAN GATES - signed, single-use, scoped tokens — enforced at the gateway, never in the UI]
         direction TB
-        Dashboard["<b>Internal Dashboard</b> - Cloud Run<br/>queue - review timeline - gate card<br/>read-only: no signing key, no write path"]:::gates
-        G2["<b>G2 - First outbound contact</b><br/>Priya, Security Analyst<br/>the human act that P1 makes unskippable"]:::gates
-        G1["<b>G1 - Risk acceptance</b><br/>Elena, CISO"]:::gates
+        Dash["`**Internal Dashboard** (Cloud Run)
+        queue · review timeline · gate card
+        read-only: no signing key, no write path`"]:::gates
+        G2["`**G2 - First outbound contact**
+        Priya, Security Analyst
+        the human act that P1 makes unskippable`"]:::gates
+        G1["`**G1 - Risk acceptance**
+        Elena, CISO`"]:::gates
 
-        Dashboard --> G2
-        Dashboard --> G1
+        Dash --> G2 & G1
     end
 
-    OutputScreening --> Dashboard
-    G2 -- "authorised send - exactly<br/>once" --> P1
-    P1 --> VendorInbox
-    G1 -- "no DECIDED state without a<br/>named human" --> Orch
+    OutScreen --> Dash
+    G2 -- "authorised send - exactly once" --> P1
+    P1 --> VI
+    G1 -- "no DECIDED state\nwithout a named human" --> Orch
 
+    %% ==========================================
     %% ⑧ GOVERNANCE & OBSERVABILITY
-    subgraph GOVERNANCE ["⑧ GOVERNANCE & OBSERVABILITY - the audit trail is the deliverable"]
+    %% ==========================================
+    subgraph Z8 [⑧ GOVERNANCE & OBSERVABILITY - the audit trail is the deliverable]
         direction TB
-        Trace["<b>Cloud Trace / Logging</b><br/>OTel span per step: goal - decision - model - latency - cost<br/>refs, hashes and verdicts only — never raw external content"]:::gov
-        Binder["<b>Audit Binder</b> - Cloud Run<br/>8 sections -> binders bucket -> template-rendered, never model-written<br/>SOC 2 CC9.2 - ISO 27001 A.5.19–5.23 - DORA"]:::gov
-        IAM["<b>IAM</b> - 10 least-privilege identities<br/>collection-level rows generated into Firestore rules<br/>230 rows asserted against a running emulator"]:::gov
-        
-        Trace --> Binder
+        Trace["`**Cloud Trace / Logging**
+        OTel span per step: goal · decision · model · latency · cost
+        refs, hashes and verdicts only — never raw external content`"]:::gov
+        Bind["`**Audit Binder** (Cloud Run)
+        8 sections ➔ binders bucket ➔ template-rendered
+        never model-written
+        SOC 2 CC9.2 · ISO 27001 A.5.19–5.23 · DORA`"]:::gov
+        IAM["`**IAM** - 10 least-privilege identities
+        collection-level rows generated into Firestore rules
+        230 rows asserted against a running emulator`"]:::gov
+
+        Trace --> Bind
     end
 
     L1 --> Trace
     L2 --> Trace
     L3 --> Trace
-    L2 --> Binder
-    L3 --> Binder
+    L2 --> Bind
+    L3 --> Bind
