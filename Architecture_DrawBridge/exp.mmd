@@ -1,0 +1,153 @@
+flowchart TD
+    %% ==========================================
+    %% ENTERPRISE SECURITY COLOR PALETTE
+    %% ==========================================
+    classDef untrusted fill:#FCE8E6,stroke:#C5221F,stroke-width:2px,color:#202124
+    classDef screening fill:#FEF7E0,stroke:#F29900,stroke-width:2px,color:#202124
+    classDef runtime fill:#E8F0FE,stroke:#1A73E8,stroke-width:2px,color:#202124
+    classDef model fill:#F3E8FD,stroke:#9334E6,stroke-width:2px,color:#202124
+    classDef memory fill:#E6F4EA,stroke:#1E8E3E,stroke-width:2px,color:#202124
+    classDef gates fill:#FCE8E6,stroke:#D93025,stroke-width:2px,color:#202124
+    classDef gov fill:#F8F9FA,stroke:#BCC1C6,stroke-width:2px,color:#202124
+    classDef backbone fill:#FFFFFF,stroke:#80868B,stroke-width:2px,stroke-dasharray: 5 5,color:#202124
+
+    %% ==========================================
+    %% LAYER 1: UNTRUSTED ZONE
+    %% ==========================================
+    subgraph Z1 [Layer 1: UNTRUSTED ZONE - Every byte authored by the judged party]
+        direction TB
+        Vendor["`**Vendor Contact**
+        NimbusWrite AI · Tier 1 SaaS`"]:::untrusted
+        Inbox["`**Vendor Inbox**
+        Cloud Run (SMTP-adapter compatible)`"]:::untrusted
+        
+        Vendor --> Inbox
+    end
+
+    %% ==========================================
+    %% LAYER 2: INGRESS SCREENING & SCRUBBING
+    %% ==========================================
+    subgraph Z2 [Layer 2: INGRESS SCREENING - No agent has a code path into quarantine]
+        direction TB
+        Quar[("`**evidence-quarantine**
+        Cloud Storage (Raw Bytes)
+        7-day lifecycle rule`")]:::screening
+        Ext["`**Local Extraction**
+        No Generative Model Contact`"]:::screening
+        Armor{"`**Model Armor**
+        Fail-Closed Boundary
+        5 Filters · 2 Templates`"}:::screening
+        Inert[("`**Inert Excerpt**
+        Blocked Payload (Evidence)`")]:::screening
+        Gemma["`**Gemma Scrubber**
+        In-VPC PII Redaction
+        Guided by Armor SDP hits`"]:::screening
+        Clean[("`**evidence-clean**
+        Signed Verdict-Bearing Stamp`")]:::screening
+
+        Quar --> Ext --> Armor
+        Armor -- "Threat Detected" --> Inert
+        Armor -- "Sanitized" --> Gemma --> Clean
+    end
+
+    Inbox -- "Evidence uploads & replies" --> Quar
+
+    %% ==========================================
+    %% LAYER 3: EVENT BACKBONE
+    %% ==========================================
+    subgraph Z3 [Layer 3: EVENT BACKBONE - Asynchronous Lifecycle]
+        Bus["`**Pub/Sub Event Bus**
+        At-least-once · Unordered
+        DLQ after 5 attempts ➔ NEEDS_HUMAN`"]:::backbone
+    end
+
+    Inert -- "-25 Trust Points\nForced Escalation" --> Bus
+    Clean -- "evidence.screened" --> Bus
+
+    %% ==========================================
+    %% LAYER 4: AGENT RUNTIME
+    %% ==========================================
+    subgraph Z4 [Layer 4: AGENT RUNTIME - ADK 2 Graph Workflow on Vertex AI]
+        direction LR
+        Orch["`**Orchestrator**
+        Tier · Plan · Re-tier · Dispatch`"]:::runtime
+        Quest["`**Questionnaire**
+        Generate · Send · Parse · Chase`"]:::runtime
+        Evid["`**Evidence**
+        Extract · Retrieve · Cross-Examine`"]:::runtime
+        Risk["`**Risk Scorer**
+        Rubric Arithmetic · Memo`"]:::runtime
+        Watch["`**Watchdog**
+        Scheduled Post-Approval Sweeps`"]:::runtime
+    end
+
+    Bus --> Orch & Quest & Evid & Risk & Watch
+
+    %% ==========================================
+    %% LAYER 5: TOOL & MODEL PLANE
+    %% ==========================================
+    subgraph Z5 [Layer 5: TOOL & MODEL PLANE - The strict execution chokepoint]
+        direction TB
+        Gateway{"`**Agent Gateway**
+        P1: Signed Approval Token Required
+        P2: Verdict-Bearing Stamp Required
+        P3: Outbound Egress Allowlist`"}:::model
+        Flash["`**Gemini 1.5 Flash** (Default)
+        Parse · Extract · Classify`"]:::model
+        Pro["`**Gemini 1.5 Pro** (Restricted)
+        Cross-Examine · Risk Memo`"]:::model
+        Embed["`**text-embedding-005**
+        Evidence Chunks (Called by Evidence only)`"]:::model
+        OutScreen["`**Output Screening**
+        drawbridge-output template`"]:::model
+
+        Gateway --> Flash & Pro & Embed
+        Pro --> OutScreen
+    end
+
+    Quest & Evid & Risk & Watch & Orch --> Gateway
+
+    %% ==========================================
+    %% LAYER 6: STATE & MEMORY
+    %% ==========================================
+    subgraph Z6 [Layer 6: STATE & MEMORY - Four tiers of persistence]
+        direction TB
+        L1[("`**L1: Session State**
+        Agent Engine (In-flight reasoning)`")]:::memory
+        L2[("`**L2: Event Ledger**
+        Firestore (Immutable · Idempotency Keys)`")]:::memory
+        L25[("`**L2.5: Semantic Index**
+        Firestore KNN (review_id pre-filtered)`")]:::memory
+        L3[("`**L3: Memory Bank**
+        Structured Provenance-Tagged Notes`")]:::memory
+    end
+
+    Embed -- "Chunk · Embed" --> L25
+    L25 -- "Top-k passages per claim" --> Pro
+    Orch & Quest & Evid & Risk & Watch -. "State/Ledger Updates" .-> L1 & L2 & L3
+
+    %% ==========================================
+    %% LAYER 7: HUMAN GATES & GOVERNANCE
+    %% ==========================================
+    subgraph Z7 [Layer 7: HUMAN GATES & GOVERNANCE - The Audit Trail]
+        direction TB
+        Dash["`**Internal Dashboard** (Cloud Run)
+        Statically rendered · Cached reads
+        Read-only: no write path to model`"]:::gates
+        G2["`**Gate G2: First Outbound Contact**
+        Priya, Security Analyst (Unskippable)`"]:::gates
+        G1["`**Gate G1: Risk Acceptance**
+        Elena, CISO`"]:::gates
+        Trace["`**Cloud Trace / Logging**
+        OTel spans: goal · decision · cost · latency`"]:::gov
+        Binder["`**Audit Binder** (Cloud Run)
+        Rendered Templates (SOC 2 · ISO 27001)`"]:::gov
+        
+        Dash --> G2 & G1
+        Trace --> Binder
+    end
+
+    OutScreen --> Dash
+    G2 -- "Authorised Send (Exactly Once)" --> Gateway
+    G1 -- "DECIDED State" --> Orch
+    L2 & L3 -. "Immutable Traces" .-> Trace
